@@ -1,5 +1,5 @@
 # pliki
-files:=howtogit
+files:=gitjestgit
 
 pandoc=pandoc
 pandoc_flags=-s
@@ -42,7 +42,7 @@ endif
 	Rscript -e "knitr::knit('$<', output='$@')"
 
 
-$(howtogit:=.html) $(howtogit:=.pdf): clean
+$(gitjestgit:=.html) $(gitjestgit:=.pdf): clean
 
 #============================================================================ 
 # More tgts
