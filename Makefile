@@ -41,6 +41,9 @@ endif
 %.md: %.Rmd
 	Rscript -e "knitr::knit('$<', output='$@')"
 
+
+$(howtogit:=.html) $(howtogit:=.pdf): clean
+
 #============================================================================ 
 # More tgts
 

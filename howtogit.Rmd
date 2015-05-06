@@ -21,11 +21,6 @@ library(knitr)
 opts_chunk$set(engine="bash", comment="")
 ```
 
-```{r, cleanup}
-git clean -df
-make clean
-```
-
 
 
 
@@ -57,6 +52,7 @@ git commit -am "Dopiski"
 echo "Siała baba mak" > plik2.txt
 git commit -am "Dopiski o sianiu w drugim pliku"
 git push origin master
+git log -p
 cd ..
 rm -rf projekt
 ```
