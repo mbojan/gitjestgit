@@ -56,7 +56,7 @@ editall:
 
 .PHONY: clean
 clean:
-	rm -rf $(files:=.html) $(files:=.pdf)
+	rm -rf $(files:=.html) $(files:=.pdf) projekt projekt.git
 
 # IMPORTANT!
 # Do puszczenia po wygenerowaniu HTMLi z opcją w 'self_contained: false' w

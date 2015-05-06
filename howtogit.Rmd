@@ -2,7 +2,9 @@
 title: gitting
 author: Michał Bojanowski
 output:
-  html_document
+  html_document:
+    toc: true
+    self_contained: true
 ---
 
 ```{r, check_commands, results="hide", echo=FALSE}
@@ -14,27 +16,62 @@ if( any(empty) )
   stop(paste("some commands are not available: ", paste(cmd[empty], collapse=", ")))
 ```
 
-```{r, setup}
+```{r, setup, echo=FALSE, results="hide"}
 library(knitr)
-options(prompt="$ ")
-opts_chunk$set( engine="bash", comment="", prompt=TRUE)
+opts_chunk$set(engine="bash", comment="")
+```
+
+```{r, cleanup}
+git clean -df
+make clean
 ```
 
 
 
 
-# Prerequisities
+
+# Na początek
+
+- Zainstalować `git`. (git bash)
+- aliasy git
 
 
 
 
+# Repozytorium
 
+Symulacja githuba.
 
+Główne repozytorium projektu
 
-
-# Check directory content
-
-
-```{r}
-ls
+```{r, create_projekt_bare}
+git init --bare projekt.git
+git clone projekt.git
+cd projekt
+echo "To jest pierwszy plik" >> plik1.txt
+echo "To jest drugi plik" >> plik2.txt
+git add plik1.txt plik2.txt
+git commit -m "Pierwsze wersje plików"
+echo "Gadery poluki" > plik1.txt
+git commit -am "Dopiski"
+echo "Siała baba mak" > plik2.txt
+git commit -am "Dopiski o sianiu w drugim pliku"
+git push origin master
+cd ..
+rm -rf projekt
 ```
+
+
+
+
+
+# Praca w pojedynke
+
+Klonujemy za pomocą URL ze strony github.
+
+
+
+
+# Zespołowo: fork - remote - pull request
+
+
