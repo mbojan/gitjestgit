@@ -1,5 +1,6 @@
 # pliki
 files:=gitjestgit
+to_clean:=projekt projekt.git
 
 pandoc=pandoc
 pandoc_flags=
@@ -41,8 +42,7 @@ endif
 %.md: %.Rmd
 	Rscript -e "knitr::knit('$<', output='$@')"
 
-
-$(gitjestgit:=.html) $(gitjestgit:=.pdf): clean
+gitjestgit.html: clean
 
 #============================================================================ 
 # More tgts
@@ -50,17 +50,13 @@ $(gitjestgit:=.html) $(gitjestgit:=.pdf): clean
 .PHONY: html
 html: $(files:=.html)
 
-.PHONY: pdf
-pdf: $(files:=.pdf)
-
 .PHONY: edit
 edit:
 	vim -p $(files:=.Rmd) Makefile
 
 .PHONY: clean
 clean:
-	rm -rf $(files:=.html) $(files:=.pdf) projekt projekt.git
-
+	rm -rf $(to_clean)
 # IMPORTANT!
 # Do puszczenia po wygenerowaniu HTMLi z opcją w 'self_contained: false' w
 # pliku '_output.yaml'!
