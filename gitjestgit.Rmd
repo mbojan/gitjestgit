@@ -7,19 +7,19 @@ output:
     self_contained: true
 ---
 
-```{r, check_commands, results="hide", echo=FALSE}
+```{r, setup_and_checks, echo=FALSE, results="hide", engine="R"}
+library(knitr)
+options(warn=2) # stop on warnings
+opts_chunk$set(engine="bash", comment="", error=FALSE)
+
 # check if necessary commands are present
-cmd <- c("bash", "sh", "git")
+cmd <- c("bash", "git")
 r <- sapply(cmd, Sys.which)
 empty <- r == ""
 if( any(empty) ) 
   stop(paste("some commands are not available: ", paste(cmd[empty], collapse=", ")))
 ```
 
-```{r, setup, echo=FALSE, results="hide"}
-library(knitr)
-opts_chunk$set(engine="bash", comment="")
-```
 
 
 
@@ -50,13 +50,13 @@ Główne repozytorium projektu
 git init --bare projekt.git
 git clone projekt.git
 cd projekt
-echo "To jest pierwszy plik" >> plik1.txt
-echo "To jest drugi plik" >> plik2.txt
+echo "To jest pierwszy plik" > plik1.txt
+echo "To jest drugi plik" > plik2.txt
 git add plik1.txt plik2.txt
 git commit -m "Pierwsze wersje plików"
-echo "Gadery poluki" > plik1.txt
+echo "Gadery poluki" >> plik1.txt
 git commit -am "Dopiski"
-echo "Siała baba mak" > plik2.txt
+echo "Siała baba mak" >> plik2.txt
 git commit -am "Dopiski o sianiu w drugim pliku"
 git push origin master
 git log -p
