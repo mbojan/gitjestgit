@@ -50,8 +50,8 @@ html: $(files:=.html)
 .PHONY: pdf
 pdf: $(files:=.pdf)
 
-.PHONY: editall
-editall:
+.PHONY: edit
+edit:
 	vim -p $(files:=.Rmd) Makefile
 
 .PHONY: clean
