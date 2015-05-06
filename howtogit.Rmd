@@ -1,0 +1,40 @@
+---
+title: gitting
+author: Michał Bojanowski
+output:
+  html_document
+---
+
+```{r, check_commands, results="hide", echo=FALSE}
+# check if necessary commands are present
+cmd <- c("bash", "sh", "git")
+r <- sapply(cmd, Sys.which)
+empty <- r == ""
+if( any(empty) ) 
+  stop(paste("some commands are not available: ", paste(cmd[empty], collapse=", ")))
+```
+
+```{r, setup}
+library(knitr)
+options(prompt="$ ")
+opts_chunk$set( engine="bash", comment="", prompt=TRUE)
+```
+
+
+
+
+# Prerequisities
+
+
+
+
+
+
+
+
+# Check directory content
+
+
+```{r}
+ls
+```
