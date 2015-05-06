@@ -1,0 +1,9 @@
+# Ignore everything...
+*
+
+# ... but the following files
+!gitjestgit.Rmd
+!gitjestgit.html
+!README.md
+!Makefile
+!.gitignore
