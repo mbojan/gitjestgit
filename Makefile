@@ -33,7 +33,6 @@ endef
 # Jak kompilować
 ifeq ($(use_rmarkdown),1) 
 %.html: %.Rmd
-	make clean
 	$(run-rmarkdown)
 else
 %.html: %.md
@@ -41,8 +40,9 @@ else
 endif
 
 %.md: %.Rmd
-	make clean
 	Rscript -e "knitr::knit('$<', output='$@')"
+
+gitjestgit.html: clean
 
 #============================================================================ 
 # More tgts
@@ -52,7 +52,7 @@ html: $(files:=.html)
 
 .PHONY: edit
 edit:
-	vim -p $(files:=.Rmd) Makefile README.md
+	vim -p $(files:=.Rmd) Makefile
 
 .PHONY: clean
 clean:

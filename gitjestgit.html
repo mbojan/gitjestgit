@@ -102,13 +102,13 @@ img {
 <pre class="bash"><code>git init --bare projekt.git
 git clone projekt.git
 cd projekt
-echo &quot;To jest pierwszy plik&quot; &gt; plik1.txt
-echo &quot;To jest drugi plik&quot; &gt; plik2.txt
+echo &quot;To jest pierwszy plik&quot; &gt;&gt; plik1.txt
+echo &quot;To jest drugi plik&quot; &gt;&gt; plik2.txt
 git add plik1.txt plik2.txt
 git commit -m &quot;Pierwsze wersje plików&quot;
-echo &quot;Gadery poluki&quot; &gt;&gt; plik1.txt
+echo &quot;Gadery poluki&quot; &gt; plik1.txt
 git commit -am &quot;Dopiski&quot;
-echo &quot;Siała baba mak&quot; &gt;&gt; plik2.txt
+echo &quot;Siała baba mak&quot; &gt; plik2.txt
 git commit -am &quot;Dopiski o sianiu w drugim pliku&quot;
 git push origin master
 git log -p
@@ -118,47 +118,47 @@ rm -rf projekt</code></pre>
 Cloning into 'projekt'...
 warning: You appear to have cloned an empty repository.
 done.
-[master (root-commit) 8155e6a] Pierwsze wersje plików
+[master (root-commit) 5c22f24] Pierwsze wersje plików
  2 files changed, 2 insertions(+)
  create mode 100644 plik1.txt
  create mode 100644 plik2.txt
-[master 2f37e4d] Dopiski
- 1 file changed, 1 insertion(+)
-[master 80b01f3] Dopiski o sianiu w drugim pliku
- 1 file changed, 1 insertion(+)
+[master f1605fe] Dopiski
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+[master 43c5a6f] Dopiski o sianiu w drugim pliku
+ 1 file changed, 1 insertion(+), 1 deletion(-)
 To /home/mbojan/Documents/projects/howtogit/projekt.git
  * [new branch]      master -&gt; master
-commit 80b01f3e8f5a5dc06b610cf5e904ace683dbde5f
+commit 43c5a6f2a03c72cdbbff70537562bb42f53e2748
 Author: Michal Bojanowski &lt;michal2992@gmail.com&gt;
-Date:   Wed May 6 13:36:21 2015 +0200
+Date:   Wed May 6 13:11:40 2015 +0200
 
     Dopiski o sianiu w drugim pliku
 
 diff --git a/plik2.txt b/plik2.txt
-index 8fafd2c..7989cc5 100644
+index 8fafd2c..44f20e5 100644
 --- a/plik2.txt
 +++ b/plik2.txt
-@@ -1 +1,2 @@
- To jest drugi plik
+@@ -1 +1 @@
+-To jest drugi plik
 +Siała baba mak
 
-commit 2f37e4d5f4016fc0537413e1dfed84a1f4f7a26b
+commit f1605fef6abcf29a883744bb8471b2ae1d066834
 Author: Michal Bojanowski &lt;michal2992@gmail.com&gt;
-Date:   Wed May 6 13:36:21 2015 +0200
+Date:   Wed May 6 13:11:40 2015 +0200
 
     Dopiski
 
 diff --git a/plik1.txt b/plik1.txt
-index db998bc..141b8ff 100644
+index db998bc..6ad3a62 100644
 --- a/plik1.txt
 +++ b/plik1.txt
-@@ -1 +1,2 @@
- To jest pierwszy plik
+@@ -1 +1 @@
+-To jest pierwszy plik
 +Gadery poluki
 
-commit 8155e6a490314ec77eaefcc3d62babd917b59e9e
+commit 5c22f24aac687b0a07fe4dcb3c81cdf6937678bf
 Author: Michal Bojanowski &lt;michal2992@gmail.com&gt;
-Date:   Wed May 6 13:36:21 2015 +0200
+Date:   Wed May 6 13:11:40 2015 +0200
 
     Pierwsze wersje plików
 
