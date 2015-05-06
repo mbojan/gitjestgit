@@ -2,7 +2,7 @@
 files:=gitjestgit
 
 pandoc=pandoc
-pandoc_flags=-s
+pandoc_flags=
 
 # Jak kompilować?
 # 1 = rmarkdown::render()
