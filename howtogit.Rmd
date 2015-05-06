@@ -1,5 +1,5 @@
 ---
-title: gitting
+title: Git jest git
 author: Michał Bojanowski
 output:
   html_document:
@@ -24,12 +24,19 @@ opts_chunk$set(engine="bash", comment="")
 
 
 
+# Wstęp
 
-# Na początek
+Praca z git bash.
+
+## Narzędzia
 
 - Zainstalować `git`. (git bash)
-- aliasy git
+- Przydatne aliasy (skróty) dla `git`
+  - oglądanie historii
 
+## Źródła
+
+- Książka o gicie
 
 
 
@@ -65,6 +72,36 @@ rm -rf projekt
 
 Klonujemy za pomocą URL ze strony github.
 
+```{r, eval=FALSE}
+git clone projekt.git
+# Przy pracy z Github  `projekt.git` wstawiamy odpowiedni URL.
+# Powstanie folder `projekt` zawierający następujące pliki:
+cd projekt
+ls projekt
+
+# 1. edytujemy i zapisujemy
+echo "Moja edycja" >> plik1.txt
+
+# 2. komitujemy
+git add plik1.txt
+git commit -m "Zmieniłem plik1.txt"
+
+# 3. wróc do 1., i tak dalej...
+```
+
+Dobre praktyki komitowania:
+
+- Lepiej częściej niż rzadziej.
+- Jeżeli to możliwe, i ma sens, komit powinien być jakąś logiczną całością.
+- ...
+
+W odpowiednim momencie (gdy zmiany mają być widoczne dla innych, na koniec dnia, etc.)
+wypychamy ("push") nasze zmiany z lokalnego repozytorium "upstream", czyli do repozytorium,
+które sklonowaliśmy. W tym przypadku `projekt.git`.
+
+```{r, eval=FALSE}
+git push origin
+```
 
 
 
