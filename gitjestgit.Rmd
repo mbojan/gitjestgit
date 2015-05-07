@@ -14,19 +14,11 @@ r <- sapply(cmd, Sys.which)
 empty <- r == ""
 if( any(empty) ) 
   stop(paste("some commands are not available: ", paste(cmd[empty], collapse=", ")))
-```
 
-```{r, setup, echo=FALSE, results="hide"}
 library(knitr) # dev version
 e <- "PS4='$(pwd | sed s/^.*gitjestgit/./)\\$ '"
 opts_chunk$set(engine="bash", comment="", engine.env=e, echo=FALSE,
                comment=NA, engine.opts="-x")
-```
-
-
-
-```{r}
-echo $PS4
 ```
 
 

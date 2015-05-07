@@ -77,8 +77,6 @@ img {
 </ul>
 </div>
 
-<pre><code>.$ echo '$(pwd' '|' sed 's/^.*gitjestgit/./)\$'
-$(pwd | sed s/^.*gitjestgit/./)\$</code></pre>
 <div id="wstep" class="section level1">
 <h1>Wstęp</h1>
 <p>Praca z git bash.</p>
@@ -112,25 +110,25 @@ done.
 ./projekt$ echo 'To jest drugi plik'
 ./projekt$ git add plik1.txt plik2.txt
 ./projekt$ git commit -m 'Pierwsze wersje plików'
-[master (root-commit) 73d7712] Pierwsze wersje plików
+[master (root-commit) 695cf08] Pierwsze wersje plików
  2 files changed, 2 insertions(+)
  create mode 100644 plik1.txt
  create mode 100644 plik2.txt
 ./projekt$ echo 'Gadery poluki'
 ./projekt$ git commit -am Dopiski
-[master 4342bb5] Dopiski
+[master ac05a60] Dopiski
  1 file changed, 1 insertion(+), 1 deletion(-)
 ./projekt$ echo 'Siała baba mak'
 ./projekt$ git commit -am 'Dopiski o sianiu w drugim pliku'
-[master f91313c] Dopiski o sianiu w drugim pliku
+[master 3d5e111] Dopiski o sianiu w drugim pliku
  1 file changed, 1 insertion(+), 1 deletion(-)
 ./projekt$ git push origin master
 To /home/mbojan/Documents/projects/gitjestgit/projekt.git
  * [new branch]      master -&gt; master
 ./projekt$ git log -p
-commit f91313c08b6f7c03e435b64f3049102b687b70b6
+commit 3d5e1112b9069a0a4ddbc947c3218c2ce90db790
 Author: Michal Bojanowski &lt;michal2992@gmail.com&gt;
-Date:   Thu May 7 02:14:33 2015 +0200
+Date:   Thu May 7 15:51:40 2015 +0200
 
     Dopiski o sianiu w drugim pliku
 
@@ -142,9 +140,9 @@ index 8fafd2c..44f20e5 100644
 -To jest drugi plik
 +Siała baba mak
 
-commit 4342bb5f939087e59d83bf827230fcfce386c994
+commit ac05a60b824ce6bee7a735eca196ba1090141741
 Author: Michal Bojanowski &lt;michal2992@gmail.com&gt;
-Date:   Thu May 7 02:14:33 2015 +0200
+Date:   Thu May 7 15:51:40 2015 +0200
 
     Dopiski
 
@@ -156,9 +154,9 @@ index db998bc..6ad3a62 100644
 -To jest pierwszy plik
 +Gadery poluki
 
-commit 73d7712ff25b98e8441adf0d0f3d5e00e8b085fd
+commit 695cf08367e1b35d551a1de76ad2a86e2e6ac781
 Author: Michal Bojanowski &lt;michal2992@gmail.com&gt;
-Date:   Thu May 7 02:14:33 2015 +0200
+Date:   Thu May 7 15:51:40 2015 +0200
 
     Pierwsze wersje plików
 
