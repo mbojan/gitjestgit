@@ -17,8 +17,16 @@ if( any(empty) )
 ```
 
 ```{r, setup, echo=FALSE, results="hide"}
-library(knitr)
-opts_chunk$set(engine="bash", comment="")
+library(knitr) # dev version
+e <- "PS4='$(pwd | sed s/^.*gitjestgit/./)\\$ '"
+opts_chunk$set(engine="bash", comment="", engine.env=e, echo=FALSE,
+               comment=NA, engine.opts="-x")
+```
+
+
+
+```{r}
+echo $PS4
 ```
 
 
@@ -72,7 +80,7 @@ rm -rf projekt
 
 Klonujemy za pomocą URL ze strony github.
 
-```{r, eval=FALSE}
+```
 git clone projekt.git
 # Przy pracy z Github  `projekt.git` wstawiamy odpowiedni URL.
 # Powstanie folder `projekt` zawierający następujące pliki:
@@ -99,7 +107,7 @@ W odpowiednim momencie (gdy zmiany mają być widoczne dla innych, na koniec dni
 wypychamy ("push") nasze zmiany z lokalnego repozytorium "upstream", czyli do repozytorium,
 które sklonowaliśmy. W tym przypadku `projekt.git`.
 
-```{r, eval=FALSE}
+```
 git push origin
 ```
 

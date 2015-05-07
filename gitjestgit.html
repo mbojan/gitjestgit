@@ -77,6 +77,8 @@ img {
 </ul>
 </div>
 
+<pre><code>.$ echo '$(pwd' '|' sed 's/^.*gitjestgit/./)\$'
+$(pwd | sed s/^.*gitjestgit/./)\$</code></pre>
 <div id="wstep" class="section level1">
 <h1>Wstęp</h1>
 <p>Praca z git bash.</p>
@@ -99,38 +101,36 @@ img {
 <h1>Repozytorium</h1>
 <p>Symulacja githuba.</p>
 <p>Główne repozytorium projektu</p>
-<pre class="bash"><code>git init --bare projekt.git
-git clone projekt.git
-cd projekt
-echo &quot;To jest pierwszy plik&quot; &gt;&gt; plik1.txt
-echo &quot;To jest drugi plik&quot; &gt;&gt; plik2.txt
-git add plik1.txt plik2.txt
-git commit -m &quot;Pierwsze wersje plików&quot;
-echo &quot;Gadery poluki&quot; &gt; plik1.txt
-git commit -am &quot;Dopiski&quot;
-echo &quot;Siała baba mak&quot; &gt; plik2.txt
-git commit -am &quot;Dopiski o sianiu w drugim pliku&quot;
-git push origin master
-git log -p
-cd ..
-rm -rf projekt</code></pre>
-<pre><code>Initialized empty Git repository in /home/mbojan/Documents/projects/howtogit/projekt.git/
+<pre><code>.$ git init --bare projekt.git
+Initialized empty Git repository in /home/mbojan/Documents/projects/gitjestgit/projekt.git/
+.$ git clone projekt.git
 Cloning into 'projekt'...
 warning: You appear to have cloned an empty repository.
 done.
-[master (root-commit) 5c22f24] Pierwsze wersje plików
+.$ cd projekt
+./projekt$ echo 'To jest pierwszy plik'
+./projekt$ echo 'To jest drugi plik'
+./projekt$ git add plik1.txt plik2.txt
+./projekt$ git commit -m 'Pierwsze wersje plików'
+[master (root-commit) 73d7712] Pierwsze wersje plików
  2 files changed, 2 insertions(+)
  create mode 100644 plik1.txt
  create mode 100644 plik2.txt
-[master f1605fe] Dopiski
+./projekt$ echo 'Gadery poluki'
+./projekt$ git commit -am Dopiski
+[master 4342bb5] Dopiski
  1 file changed, 1 insertion(+), 1 deletion(-)
-[master 43c5a6f] Dopiski o sianiu w drugim pliku
+./projekt$ echo 'Siała baba mak'
+./projekt$ git commit -am 'Dopiski o sianiu w drugim pliku'
+[master f91313c] Dopiski o sianiu w drugim pliku
  1 file changed, 1 insertion(+), 1 deletion(-)
-To /home/mbojan/Documents/projects/howtogit/projekt.git
+./projekt$ git push origin master
+To /home/mbojan/Documents/projects/gitjestgit/projekt.git
  * [new branch]      master -&gt; master
-commit 43c5a6f2a03c72cdbbff70537562bb42f53e2748
+./projekt$ git log -p
+commit f91313c08b6f7c03e435b64f3049102b687b70b6
 Author: Michal Bojanowski &lt;michal2992@gmail.com&gt;
-Date:   Wed May 6 13:11:40 2015 +0200
+Date:   Thu May 7 02:14:33 2015 +0200
 
     Dopiski o sianiu w drugim pliku
 
@@ -142,9 +142,9 @@ index 8fafd2c..44f20e5 100644
 -To jest drugi plik
 +Siała baba mak
 
-commit f1605fef6abcf29a883744bb8471b2ae1d066834
+commit 4342bb5f939087e59d83bf827230fcfce386c994
 Author: Michal Bojanowski &lt;michal2992@gmail.com&gt;
-Date:   Wed May 6 13:11:40 2015 +0200
+Date:   Thu May 7 02:14:33 2015 +0200
 
     Dopiski
 
@@ -156,9 +156,9 @@ index db998bc..6ad3a62 100644
 -To jest pierwszy plik
 +Gadery poluki
 
-commit 5c22f24aac687b0a07fe4dcb3c81cdf6937678bf
+commit 73d7712ff25b98e8441adf0d0f3d5e00e8b085fd
 Author: Michal Bojanowski &lt;michal2992@gmail.com&gt;
-Date:   Wed May 6 13:11:40 2015 +0200
+Date:   Thu May 7 02:14:33 2015 +0200
 
     Pierwsze wersje plików
 
@@ -175,12 +175,14 @@ index 0000000..8fafd2c
 --- /dev/null
 +++ b/plik2.txt
 @@ -0,0 +1 @@
-+To jest drugi plik</code></pre>
++To jest drugi plik
+./projekt$ cd ..
+.$ rm -rf projekt</code></pre>
 </div>
 <div id="praca-w-pojedynke" class="section level1">
 <h1>Praca w pojedynke</h1>
 <p>Klonujemy za pomocą URL ze strony github.</p>
-<pre class="bash"><code>git clone projekt.git
+<pre><code>git clone projekt.git
 # Przy pracy z Github  `projekt.git` wstawiamy odpowiedni URL.
 # Powstanie folder `projekt` zawierający następujące pliki:
 cd projekt
@@ -201,7 +203,7 @@ git commit -m &quot;Zmieniłem plik1.txt&quot;
 <li>…</li>
 </ul>
 <p>W odpowiednim momencie (gdy zmiany mają być widoczne dla innych, na koniec dnia, etc.) wypychamy (“push”) nasze zmiany z lokalnego repozytorium “upstream”, czyli do repozytorium, które sklonowaliśmy. W tym przypadku <code>projekt.git</code>.</p>
-<pre class="bash"><code>git push origin</code></pre>
+<pre><code>git push origin</code></pre>
 </div>
 <div id="zespoowo-fork---remote---pull-request" class="section level1">
 <h1>Zespołowo: fork - remote - pull request</h1>
