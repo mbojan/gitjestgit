@@ -16,7 +16,9 @@ if( any(empty) )
   stop(paste("some commands are not available: ", paste(cmd[empty], collapse=", ")))
 
 library(knitr) # dev version
-e <- "PS4='$(pwd | sed s/^.*gitjestgit/./)\\$ '"
+pr <- function(user=NULL) {
+  paste0("PS4=", sQuote('$(pwd | sed s/^.*gitjestgit/./)\\$ ')
+}
 opts_chunk$set(engine="bash", comment="", engine.env=e, echo=FALSE,
                comment=NA, engine.opts="-x")
 ```
@@ -59,7 +61,6 @@ git commit -am "Dopiski"
 echo "Siała baba mak" > plik2.txt
 git commit -am "Dopiski o sianiu w drugim pliku"
 git push origin master
-git log -p
 cd ..
 rm -rf projekt
 ```
@@ -105,6 +106,49 @@ git push origin
 
 
 
-# Zespołowo: fork - remote - pull request
+# Zespołowo: fork & pull request
+
+Zespół sklada się z:
+
+- Aldona
+- Barbara
+- 
+
+Robimy forka na githubie. Tutaj nazywa się `fork.git`.
+
+```{r, fake_fork}
+git init --bare fork.git
+git clone projekt.git
+cd projekt
+git remote add fork ../fork.git
+git push fork master
+cd ..
+rm -rf projekt
+```
+
+Klonujemy forka. robimy brancha i pracujemy na nim.
+
+
+```{r}
+git clone fork.git
+cd fork
+git checkout -b mojezmiany
+echo "zmiana1" >> plik1.txt
+git add plik1.txt
+git commit -m "zmiana1"
+echo "zmiana2" >> plik2.txt
+git add plik2.txt
+git commit -m "zmiana2"
+
+#
+git log --no-color --oneline --graph
+```
+
+W między czasie współpracownik pracował na masterze.
+
+```{r}
+
+
+
 
 

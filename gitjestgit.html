@@ -73,7 +73,7 @@ img {
 </ul></li>
 <li><a href="#repozytorium">Repozytorium</a></li>
 <li><a href="#praca-w-pojedynke">Praca w pojedynke</a></li>
-<li><a href="#zespoowo-fork---remote---pull-request">Zespołowo: fork - remote - pull request</a></li>
+<li><a href="#zespoowo-fork-pull-request">Zespołowo: fork &amp; pull request</a></li>
 </ul>
 </div>
 
@@ -110,70 +110,21 @@ done.
 ./projekt$ echo 'To jest drugi plik'
 ./projekt$ git add plik1.txt plik2.txt
 ./projekt$ git commit -m 'Pierwsze wersje plików'
-[master (root-commit) 695cf08] Pierwsze wersje plików
+[master (root-commit) 1609362] Pierwsze wersje plików
  2 files changed, 2 insertions(+)
  create mode 100644 plik1.txt
  create mode 100644 plik2.txt
 ./projekt$ echo 'Gadery poluki'
 ./projekt$ git commit -am Dopiski
-[master ac05a60] Dopiski
+[master 0bcdf23] Dopiski
  1 file changed, 1 insertion(+), 1 deletion(-)
 ./projekt$ echo 'Siała baba mak'
 ./projekt$ git commit -am 'Dopiski o sianiu w drugim pliku'
-[master 3d5e111] Dopiski o sianiu w drugim pliku
+[master b2accf2] Dopiski o sianiu w drugim pliku
  1 file changed, 1 insertion(+), 1 deletion(-)
 ./projekt$ git push origin master
 To /home/mbojan/Documents/projects/gitjestgit/projekt.git
  * [new branch]      master -&gt; master
-./projekt$ git log -p
-commit 3d5e1112b9069a0a4ddbc947c3218c2ce90db790
-Author: Michal Bojanowski &lt;michal2992@gmail.com&gt;
-Date:   Thu May 7 15:51:40 2015 +0200
-
-    Dopiski o sianiu w drugim pliku
-
-diff --git a/plik2.txt b/plik2.txt
-index 8fafd2c..44f20e5 100644
---- a/plik2.txt
-+++ b/plik2.txt
-@@ -1 +1 @@
--To jest drugi plik
-+Siała baba mak
-
-commit ac05a60b824ce6bee7a735eca196ba1090141741
-Author: Michal Bojanowski &lt;michal2992@gmail.com&gt;
-Date:   Thu May 7 15:51:40 2015 +0200
-
-    Dopiski
-
-diff --git a/plik1.txt b/plik1.txt
-index db998bc..6ad3a62 100644
---- a/plik1.txt
-+++ b/plik1.txt
-@@ -1 +1 @@
--To jest pierwszy plik
-+Gadery poluki
-
-commit 695cf08367e1b35d551a1de76ad2a86e2e6ac781
-Author: Michal Bojanowski &lt;michal2992@gmail.com&gt;
-Date:   Thu May 7 15:51:40 2015 +0200
-
-    Pierwsze wersje plików
-
-diff --git a/plik1.txt b/plik1.txt
-new file mode 100644
-index 0000000..db998bc
---- /dev/null
-+++ b/plik1.txt
-@@ -0,0 +1 @@
-+To jest pierwszy plik
-diff --git a/plik2.txt b/plik2.txt
-new file mode 100644
-index 0000000..8fafd2c
---- /dev/null
-+++ b/plik2.txt
-@@ -0,0 +1 @@
-+To jest drugi plik
 ./projekt$ cd ..
 .$ rm -rf projekt</code></pre>
 </div>
@@ -203,8 +154,45 @@ git commit -m &quot;Zmieniłem plik1.txt&quot;
 <p>W odpowiednim momencie (gdy zmiany mają być widoczne dla innych, na koniec dnia, etc.) wypychamy (“push”) nasze zmiany z lokalnego repozytorium “upstream”, czyli do repozytorium, które sklonowaliśmy. W tym przypadku <code>projekt.git</code>.</p>
 <pre><code>git push origin</code></pre>
 </div>
-<div id="zespoowo-fork---remote---pull-request" class="section level1">
-<h1>Zespołowo: fork - remote - pull request</h1>
+<div id="zespoowo-fork-pull-request" class="section level1">
+<h1>Zespołowo: fork &amp; pull request</h1>
+<p>Robimy forka na githubie. Tutaj nazywa się <code>fork.git</code>.</p>
+<pre><code>.$ git init --bare fork.git
+Initialized empty Git repository in /home/mbojan/Documents/projects/gitjestgit/fork.git/
+.$ git clone projekt.git
+Cloning into 'projekt'...
+done.
+.$ cd projekt
+./projekt$ git remote add fork ../fork.git
+./projekt$ git push fork master
+To ../fork.git
+ * [new branch]      master -&gt; master
+./projekt$ cd ..
+.$ rm -rf projekt</code></pre>
+<p>Klonujemy forka. robimy brancha i pracujemy na nim.</p>
+<pre><code>.$ git clone fork.git
+Cloning into 'fork'...
+done.
+.$ cd fork
+./fork$ git checkout -b mojezmiany
+Switched to a new branch 'mojezmiany'
+./fork$ echo zmiana1
+./fork$ git add plik1.txt
+./fork$ git commit -m zmiana1
+[mojezmiany 3f9af67] zmiana1
+ 1 file changed, 1 insertion(+)
+./fork$ echo zmiana2
+./fork$ git add plik2.txt
+./fork$ git commit -m zmiana2
+[mojezmiany c9f89c5] zmiana2
+ 1 file changed, 1 insertion(+)</code></pre>
+<pre><code>.$ cd fork
+./fork$ git log --no-color --oneline --graph
+* c9f89c5 zmiana2
+* 3f9af67 zmiana1
+* b2accf2 Dopiski o sianiu w drugim pliku
+* 0bcdf23 Dopiski
+* 1609362 Pierwsze wersje plików</code></pre>
 </div>
 
 

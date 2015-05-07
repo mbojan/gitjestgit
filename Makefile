@@ -1,6 +1,6 @@
 # pliki
 files:=gitjestgit
-to_clean:=projekt projekt.git
+to_clean:=projekt projekt.git fork fork.git
 
 pandoc=pandoc
 pandoc_flags=
