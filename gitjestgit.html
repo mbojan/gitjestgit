@@ -74,9 +74,13 @@ img {
 <li><a href="#repozytorium">Repozytorium</a></li>
 <li><a href="#praca-w-pojedynke">Praca w pojedynke</a></li>
 <li><a href="#zespoowo-fork-pull-request">Zespołowo: fork &amp; pull request</a></li>
+<li><a href="#faq">FAQ</a><ul>
+<li><a href="#rebase-publicznego-brancha">Rebase publicznego brancha?</a></li>
+</ul></li>
 </ul>
 </div>
 
+<pre><code>to jest zawartość pliku dupa</code></pre>
 <div id="wstep" class="section level1">
 <h1>Wstęp</h1>
 <p>Praca z git bash.</p>
@@ -106,22 +110,24 @@ Cloning into 'projekt'...
 warning: You appear to have cloned an empty repository.
 done.
 .$ cd projekt
+./projekt$ git config user.name szef
+./projekt$ git config user.email szef@korpo.com
 ./projekt$ echo 'To jest pierwszy plik'
 ./projekt$ echo 'To jest drugi plik'
 ./projekt$ git add plik1.txt plik2.txt
 ./projekt$ git commit -m 'Pierwsze wersje plików'
-[master (root-commit) 1609362] Pierwsze wersje plików
+[master (root-commit) d204d00] Pierwsze wersje plików
  2 files changed, 2 insertions(+)
  create mode 100644 plik1.txt
  create mode 100644 plik2.txt
 ./projekt$ echo 'Gadery poluki'
 ./projekt$ git commit -am Dopiski
-[master 0bcdf23] Dopiski
- 1 file changed, 1 insertion(+), 1 deletion(-)
+[master 5ece86c] Dopiski
+ 1 file changed, 1 insertion(+)
 ./projekt$ echo 'Siała baba mak'
 ./projekt$ git commit -am 'Dopiski o sianiu w drugim pliku'
-[master b2accf2] Dopiski o sianiu w drugim pliku
- 1 file changed, 1 insertion(+), 1 deletion(-)
+[master 88427a8] Dopiski o sianiu w drugim pliku
+ 1 file changed, 1 insertion(+)
 ./projekt$ git push origin master
 To /home/mbojan/Documents/projects/gitjestgit/projekt.git
  * [new branch]      master -&gt; master
@@ -156,43 +162,104 @@ git commit -m &quot;Zmieniłem plik1.txt&quot;
 </div>
 <div id="zespoowo-fork-pull-request" class="section level1">
 <h1>Zespołowo: fork &amp; pull request</h1>
-<p>Robimy forka na githubie. Tutaj nazywa się <code>fork.git</code>.</p>
-<pre><code>.$ git init --bare fork.git
-Initialized empty Git repository in /home/mbojan/Documents/projects/gitjestgit/fork.git/
+</div>
+<div id="faq" class="section level1">
+<h1>FAQ</h1>
+<div id="rebase-publicznego-brancha" class="section level2">
+<h2>Rebase publicznego brancha?</h2>
+<p>Mamy repo <code>projekt.git</code>.</p>
+<p>Na github robimy forka. Niech nazywa się <code>fork-pracownik.git</code></p>
+<pre><code>.$ git init --bare fork-pracownik.git
+Initialized empty Git repository in /home/mbojan/Documents/projects/gitjestgit/fork-pracownik.git/
 .$ git clone projekt.git
 Cloning into 'projekt'...
 done.
 .$ cd projekt
-./projekt$ git remote add fork ../fork.git
+./projekt$ git remote add fork ../fork-pracownik.git
 ./projekt$ git push fork master
-To ../fork.git
+To ../fork-pracownik.git
  * [new branch]      master -&gt; master
 ./projekt$ cd ..
 .$ rm -rf projekt</code></pre>
 <p>Klonujemy forka. robimy brancha i pracujemy na nim.</p>
-<pre><code>.$ git clone fork.git
-Cloning into 'fork'...
-done.
-.$ cd fork
-./fork$ git checkout -b mojezmiany
+<pre><code>pracownik:.$ git clone fork-pracownik.git pracownik
+Cloning into 'pracownik'...
+done.</code></pre>
+<pre><code>.$ cd pracownik
+./pracownik$ git checkout -b mojezmiany
 Switched to a new branch 'mojezmiany'
-./fork$ echo zmiana1
-./fork$ git add plik1.txt
-./fork$ git commit -m zmiana1
-[mojezmiany 3f9af67] zmiana1
+./pracownik$ echo zmiana1
+./pracownik$ git add plik1.txt
+./pracownik$ git commit -m zmiana1
+[mojezmiany bc5eb7d] zmiana1
  1 file changed, 1 insertion(+)
-./fork$ echo zmiana2
-./fork$ git add plik2.txt
-./fork$ git commit -m zmiana2
-[mojezmiany c9f89c5] zmiana2
- 1 file changed, 1 insertion(+)</code></pre>
-<pre><code>.$ cd fork
-./fork$ git log --no-color --oneline --graph
-* c9f89c5 zmiana2
-* 3f9af67 zmiana1
-* b2accf2 Dopiski o sianiu w drugim pliku
-* 0bcdf23 Dopiski
-* 1609362 Pierwsze wersje plików</code></pre>
+./pracownik$ echo zmiana2
+./pracownik$ git add plik2.txt
+./pracownik$ git commit -m zmiana2
+[mojezmiany 88e70fe] zmiana2
+ 1 file changed, 1 insertion(+)
+./pracownik$ git lgm
+* 88e70fe - (0 seconds ago) zmiana2 - pracownik  (HEAD, mojezmiany)
+* bc5eb7d - (0 seconds ago) zmiana1 - pracownik 
+* 88427a8 - (0 seconds ago) Dopiski o sianiu w drugim pliku - szef  (origin/master, origin/HEAD, master)
+* 5ece86c - (0 seconds ago) Dopiski - szef 
+* d204d00 - (0 seconds ago) Pierwsze wersje plików - szef </code></pre>
+<p>W między czasie szef pracował na masterze.</p>
+<pre><code>szef:.$ git clone projekt.git projekt-szef
+Cloning into 'projekt-szef'...
+done.
+szef:.$ cd projekt-szef
+szef:./projekt-szef$ echo 'zmiana szefa'
+szef:./projekt-szef$ git add plik1.txt
+szef:./projekt-szef$ git commit -m 'zmiana szefa'
+[master dda3062] zmiana szefa
+ 1 file changed, 1 insertion(+)
+szef:./projekt-szef$ echo 'inna zmiana przez szefa'
+szef:./projekt-szef$ git add plik2.txt
+szef:./projekt-szef$ git commit -m 'inna zmiana szefa'
+[master 6aa3133] inna zmiana szefa
+ 1 file changed, 1 insertion(+)
+szef:./projekt-szef$ git push origin master
+To /home/mbojan/Documents/projects/gitjestgit/projekt.git
+   88427a8..6aa3133  master -&gt; master
+szef:./projekt-szef$ git lgm
+* 6aa3133 - (0 seconds ago) inna zmiana szefa - Michal Bojanowski  (HEAD, origin/master, origin/HEAD, master)
+* dda3062 - (0 seconds ago) zmiana szefa - Michal Bojanowski 
+* 88427a8 - (0 seconds ago) Dopiski o sianiu w drugim pliku - szef 
+* 5ece86c - (0 seconds ago) Dopiski - szef 
+* d204d00 - (0 seconds ago) Pierwsze wersje plików - szef </code></pre>
+<p>Pracownik chce włączyć swoje zmiany do <code>master</code>. W tym celu aktualizuje swoje lokalne repo</p>
+<pre><code>pracownik:.$ cd pracownik
+pracownik:./pracownik$ git remote add upstream ../projekt.git
+pracownik:./pracownik$ git fetch upstream
+From ../projekt
+ * [new branch]      master     -&gt; upstream/master
+pracownik:./pracownik$ git checkout master
+Switched to branch 'master'
+Your branch is up-to-date with 'origin/master'.
+pracownik:./pracownik$ git pull upstream master
+From ../projekt
+ * branch            master     -&gt; FETCH_HEAD
+Updating 88427a8..6aa3133
+Fast-forward
+ plik1.txt | 1 +
+ plik2.txt | 1 +
+ 2 files changed, 2 insertions(+)
+pracownik:./pracownik$ git lgm
+* 6aa3133 - (1 second ago) inna zmiana szefa - Michal Bojanowski  (HEAD, upstream/master, master)
+* dda3062 - (1 second ago) zmiana szefa - Michal Bojanowski 
+| * 88e70fe - (1 second ago) zmiana2 - pracownik  (mojezmiany)
+| * bc5eb7d - (1 second ago) zmiana1 - pracownik 
+|/  
+* 88427a8 - (1 second ago) Dopiski o sianiu w drugim pliku - szef  (origin/master, origin/HEAD)
+* 5ece86c - (1 second ago) Dopiski - szef 
+* d204d00 - (1 second ago) Pierwsze wersje plików - szef </code></pre>
+<p>Gałęzie <code>upstream/master</code> i <code>mojezmiany</code> się rozgałęziają.</p>
+<p>Przepisujemy zmiany w <code>mojezmiany</code> nad <code>upstream/master</code></p>
+<pre><code>cd pracownik
+git checkout mojezmiany
+git rebase master</code></pre>
+</div>
 </div>
 
 

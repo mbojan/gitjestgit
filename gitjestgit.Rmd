@@ -17,11 +17,37 @@ if( any(empty) )
 
 library(knitr) # dev version
 pr <- function(user=NULL) {
-  paste0("PS4=", sQuote('$(pwd | sed s/^.*gitjestgit/./)\\$ ')
+  u <- if(is.null(user)) "" else paste0(user, ":")
+  paste0("PS4=", u, sQuote('$(pwd | sed s/^.*gitjestgit/./)\\$ ') )
 }
-opts_chunk$set(engine="bash", comment="", engine.env=e, echo=FALSE,
+
+opts_chunk$set(engine="bash", comment="", engine.env=pr(), echo=FALSE,
                comment=NA, engine.opts="-x")
 ```
+
+
+
+
+
+```{r, file_contents, engine="R"}
+plik1 <- "Wpadła gruszka do fartuszka, 
+A za gruszką dwa jabłuszka, 
+Lecz śliweczka wpaść nie chciała, 
+Bo śliweczka niedojrzała.
+
+Przepisujemy:
+"
+
+plik2 <- " Idzie kominiarz 
+Po drabinie, 
+Fiku miku, 
+Już w kominie!
+
+Przepisujemy:
+"
+```
+
+
 
 
 
@@ -42,24 +68,36 @@ Praca z git bash.
 
 
 
+
+
 # Repozytorium
 
 Symulacja githuba.
 
-Główne repozytorium projektu
+Główne repozytorium projektu na GitHubie.
 
 ```{r, create_projekt_bare}
 git init --bare projekt.git
 git clone projekt.git
 cd projekt
-echo "To jest pierwszy plik" >> plik1.txt
-echo "To jest drugi plik" >> plik2.txt
+git config user.name szef
+git config user.email szef@korpo.com
+```
+
+
+```{r, zapisz_pliki, engine="R"}
+cat(plik1, file="projekt/plik1.txt")
+cat(plik2, file="projekt/plik2.txt")
+```
+
+
+```{r}
 git add plik1.txt plik2.txt
 git commit -m "Pierwsze wersje plików"
-echo "Gadery poluki" > plik1.txt
-git commit -am "Dopiski"
-echo "Siała baba mak" > plik2.txt
-git commit -am "Dopiski o sianiu w drugim pliku"
+echo "Wpadła gruszka do fartuszka" >> plik1.txt
+git commit -am "Wers o gruszce"
+echo "Idzie kominiarz" >> plik2.txt
+git commit -am "kominiarz"
 git push origin master
 cd ..
 rm -rf projekt
@@ -108,19 +146,28 @@ git push origin
 
 # Zespołowo: fork & pull request
 
-Zespół sklada się z:
 
-- Aldona
-- Barbara
-- 
 
-Robimy forka na githubie. Tutaj nazywa się `fork.git`.
+
+# FAQ
+
+
+
+
+
+
+
+## Rebase publicznego brancha?
+
+Mamy repo `projekt.git`.
+
+Na github robimy forka. Niech nazywa się `fork-pracownik.git`
 
 ```{r, fake_fork}
-git init --bare fork.git
+git init --bare fork-pracownik.git
 git clone projekt.git
 cd projekt
-git remote add fork ../fork.git
+git remote add fork ../fork-pracownik.git
 git push fork master
 cd ..
 rm -rf projekt
@@ -129,26 +176,69 @@ rm -rf projekt
 Klonujemy forka. robimy brancha i pracujemy na nim.
 
 
-```{r}
-git clone fork.git
-cd fork
-git checkout -b mojezmiany
-echo "zmiana1" >> plik1.txt
-git add plik1.txt
-git commit -m "zmiana1"
-echo "zmiana2" >> plik2.txt
-git add plik2.txt
-git commit -m "zmiana2"
-
-#
-git log --no-color --oneline --graph
+```{r, engine.env=pr("pracownik")}
+git clone fork-pracownik.git pracownik
 ```
 
-W między czasie współpracownik pracował na masterze.
-
 ```{r}
+cd pracownik
+git config user.name pracownik
+```
 
 
+
+```{r, engine.env=pr("pracownik")}
+cd pracownik
+git checkout -b gruszka
+echo "A za gruszką dwa jabłuszka," >> plik1.txt
+git add plik1.txt
+git commit -m "jabłuszka"
+echo "Lecz śliweczka wpaść nie chicała" >> plik1.txt
+git add plik1.txt
+git commit -m "śliweczka"
+
+#
+git lgm
+```
+
+W między czasie szef pracował na masterze.
+
+
+```{r, engine.env=pr("szef")}
+git clone projekt.git projekt-szef
+cd projekt-szef
+echo "Po drabinie," >> plik2.txt
+git add plik2.txt
+git commit -m "drabina"
+echo "Fiku muku," >> plik2.txt
+git add plik2.txt
+git commit -m "fikumiku"
+git push origin master
+
+git lgm
+```
+
+Pracownik chce włączyć swoje zmiany do `master`. W tym celu aktualizuje swoje lokalne repo
+
+```{r, engine.env=pr("pracownik")}
+cd pracownik
+git remote add upstream ../projekt.git
+git fetch upstream
+# update lokalnego mastera
+git checkout master
+git pull upstream master
+git lgm
+```
+
+Gałęzie `upstream/master` i `mojezmiany` się rozgałęziają.
+
+Przepisujemy zmiany w `mojezmiany` nad `upstream/master`
+
+```
+cd pracownik
+git checkout mojezmiany
+git rebase master
+```
 
 
 
