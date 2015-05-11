@@ -75,11 +75,12 @@ img {
 <li><a href="#praca-w-pojedynke">Praca w pojedynke</a></li>
 <li><a href="#zespoowo-fork-pull-request">Zespołowo: fork &amp; pull request</a></li>
 <li><a href="#faq">FAQ</a><ul>
-<li><a href="#rebase-publicznego-brancha">Rebase publicznego brancha?</a></li>
+<li><a href="#rebase-i-ff-merge-publicznego-brancha">Rebase i ff-merge publicznego brancha?</a></li>
 </ul></li>
 </ul>
 </div>
 
+<pre><code>.$ git config --global alias.lgm 'log --graph --all --format=format:'\''%h - (%ar) %s - %an %d'\'' --abbrev-commit --date=relative'</code></pre>
 <div id="wstep" class="section level1">
 <h1>Wstęp</h1>
 <p>Praca z git bash.</p>
@@ -114,17 +115,17 @@ done.
 <pre><code>.$ cd projekt
 ./projekt$ git add plik1.txt plik2.txt
 ./projekt$ git commit -m 'Pierwsze wersje plików'
-[master (root-commit) 25c91e4] Pierwsze wersje plików
+[master (root-commit) 45e731a] Pierwsze wersje plików
  2 files changed, 12 insertions(+)
  create mode 100644 plik1.txt
  create mode 100644 plik2.txt
 ./projekt$ echo 'Wpadła gruszka do fartuszka'
 ./projekt$ git commit -am 'Wers o gruszce'
-[master d9cc67e] Wers o gruszce
+[master 14a2152] Wers o gruszce
  1 file changed, 1 insertion(+)
 ./projekt$ echo 'Idzie kominiarz'
 ./projekt$ git commit -am kominiarz
-[master 67aff45] kominiarz
+[master e1c88e0] kominiarz
  1 file changed, 1 insertion(+)
 ./projekt$ git push origin master
 To /home/mbojan/Documents/projects/gitjestgit/projekt.git
@@ -163,227 +164,204 @@ git commit -m &quot;Zmieniłem plik1.txt&quot;
 </div>
 <div id="faq" class="section level1">
 <h1>FAQ</h1>
-<div id="rebase-publicznego-brancha" class="section level2">
-<h2>Rebase publicznego brancha?</h2>
-<p>Mamy repo <code>projekt.git</code>.</p>
-<p>Na github robimy forka. Niech nazywa się <code>fork-pracownik.git</code></p>
-<pre><code>.$ git init --bare fork-pracownik.git
-Initialized empty Git repository in /home/mbojan/Documents/projects/gitjestgit/fork-pracownik.git/
+<div id="rebase-i-ff-merge-publicznego-brancha" class="section level2">
+<h2>Rebase i ff-merge publicznego brancha?</h2>
+<p>Publiczny feature branch się przydaje jeżeli pracujemy nad nim z więcej niż jednego komputera.</p>
+<p>Scenariusz</p>
+<ol style="list-style-type: decimal">
+<li>szef pracuje ma <code>master</code> nieustannie</li>
+<li>pracownik1 robi branch <code>gruszka</code> i tam robi komity</li>
+<li>Branch gruszka jest <code>push</code>owany do repo</li>
+<li>pracownik2 aktualizuje <code>gruszka</code> do aktualnego stanu <code>master</code> i dodaje swoje komity.</li>
+<li>pracownik2 pushuje <code>gruszka</code> do repo</li>
+<li>pracownik1 chce kontynuować pracę na <code>gruszka</code> po zmianach pracownik2, łącznie z aktualizowaniem do aktualnego <code>master</code></li>
+<li>Kroki 4-6 się powtarzają.</li>
+<li>Praca na <code>gruszka</code> jest mergowana z <code>master</code>.</li>
+</ol>
+<p>Pracownik1 i pracownik2 to mogą być różne osoby, albo ta sama osoba pracująca na dwóch różnych komputerach. Tutaj zakładamy, że to ta sama osoba (pracuje na jednym forku głównego repozytorium).</p>
+<p>Główne repozytorium projektu na github to <code>projekt.git</code>.</p>
+<p>Na github pracownik1 robi forka. Niech nazywa się <code>fork-pracownik1.git</code></p>
+<pre><code>.$ git init --bare fork-pracownik1.git
+Initialized empty Git repository in /home/mbojan/Documents/projects/gitjestgit/fork-pracownik1.git/
 .$ git clone projekt.git
 Cloning into 'projekt'...
 done.
 .$ cd projekt
-./projekt$ git remote add fork ../fork-pracownik.git
+./projekt$ git remote add fork ../fork-pracownik1.git
 ./projekt$ git push fork master
-To ../fork-pracownik.git
+To ../fork-pracownik1.git
  * [new branch]      master -&gt; master
 ./projekt$ cd ..
 .$ rm -rf projekt</code></pre>
-<p>Klonujemy forka. robimy brancha i pracujemy na nim.</p>
-<pre><code>pracownik:.$ git clone fork-pracownik.git pracownik
-Cloning into 'pracownik'...
+<p>Pracownik1 klonuje forka.</p>
+<pre><code>pracownik1:.$ git clone fork-pracownik1.git pracownik1
+Cloning into 'pracownik1'...
 done.</code></pre>
-<pre><code>.$ cd pracownik
-./pracownik$ git config user.name pracownik</code></pre>
-<pre><code>pracownik:.$ cd pracownik
-pracownik:./pracownik$ git checkout -b gruszka
+<pre><code>.$ cd pracownik1
+./pracownik1$ git config user.name pracownik1</code></pre>
+<p>Robi brancha <code>gruszka</code> i pracuje na nim. Na koniec dnia wypycha branch <code>gruszka</code> do forka na githubie.</p>
+<pre><code>pracownik:.$ cd pracownik1
+pracownik:./pracownik1$ git checkout -b gruszka
 Switched to a new branch 'gruszka'
-pracownik:./pracownik$ echo 'A za gruszką dwa jabłuszka,'
-pracownik:./pracownik$ git add plik1.txt
-pracownik:./pracownik$ git commit -m jabłuszka
-[gruszka 118eee4] jabłuszka
+pracownik:./pracownik1$ echo 'A za gruszką dwa jabłuszka,'
+pracownik:./pracownik1$ git add plik1.txt
+pracownik:./pracownik1$ git commit -m jabłuszka
+[gruszka 6aec2a0] jabłuszka
  1 file changed, 1 insertion(+)
-pracownik:./pracownik$ echo 'Lecz śliweczka wpaść nie chicała'
-pracownik:./pracownik$ git add plik1.txt
-pracownik:./pracownik$ git commit -m śliweczka
-[gruszka 3f083ff] śliweczka
+pracownik:./pracownik1$ echo 'Lecz śliweczka wpaść nie chicała'
+pracownik:./pracownik1$ git add plik1.txt
+pracownik:./pracownik1$ git commit -m śliweczka
+[gruszka c958b28] śliweczka
  1 file changed, 1 insertion(+)
-pracownik:./pracownik$ git lgm
-* 3f083ff - (0 seconds ago) śliweczka - pracownik  (HEAD, gruszka)
-* 118eee4 - (0 seconds ago) jabłuszka - pracownik 
-* 67aff45 - (0 seconds ago) kominiarz - szef  (origin/master, origin/HEAD, master)
-* d9cc67e - (0 seconds ago) Wers o gruszce - szef 
-* 25c91e4 - (0 seconds ago) Pierwsze wersje plików - szef pracownik:./pracownik$ git push origin gruszka
-To /home/mbojan/Documents/projects/gitjestgit/fork-pracownik.git
+pracownik:./pracownik1$ git lgm
+* c958b28 - (0 seconds ago) śliweczka - pracownik1  (HEAD, gruszka)
+* 6aec2a0 - (1 second ago) jabłuszka - pracownik1 
+* e1c88e0 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD, master)
+* 14a2152 - (1 second ago) Wers o gruszce - szef 
+* 45e731a - (1 second ago) Pierwsze wersje plików - szef pracownik:./pracownik1$ git push origin gruszka
+To /home/mbojan/Documents/projects/gitjestgit/fork-pracownik1.git
  * [new branch]      gruszka -&gt; gruszka</code></pre>
 <p>W między czasie szef pracował na masterze.</p>
-<pre><code>szef:.$ git clone projekt.git projekt-szef
-Cloning into 'projekt-szef'...
+<pre><code>szef:.$ git clone projekt.git szef
+Cloning into 'szef'...
 done.
-szef:.$ cd projekt-szef
-szef:./projekt-szef$ echo 'Po drabinie,'
-szef:./projekt-szef$ git add plik2.txt
-szef:./projekt-szef$ git commit -m drabina
-[master a479fae] drabina
+szef:.$ cd szef
+szef:./szef$ echo 'Po drabinie,'
+szef:./szef$ git add plik2.txt
+szef:./szef$ git commit -m drabina
+[master bd86d63] drabina
  1 file changed, 1 insertion(+)
-szef:./projekt-szef$ echo 'Fiku muku,'
-szef:./projekt-szef$ git add plik2.txt
-szef:./projekt-szef$ git commit -m fikumiku
-[master ed38d05] fikumiku
+szef:./szef$ echo 'Fiku muku,'
+szef:./szef$ git add plik2.txt
+szef:./szef$ git commit -m fikumiku
+[master 7afc2e5] fikumiku
  1 file changed, 1 insertion(+)
-szef:./projekt-szef$ git push origin master
+szef:./szef$ git push origin master
 To /home/mbojan/Documents/projects/gitjestgit/projekt.git
-   67aff45..ed38d05  master -&gt; master
-szef:./projekt-szef$ git lgm
-* ed38d05 - (0 seconds ago) fikumiku - Michal Bojanowski  (HEAD, origin/master, origin/HEAD, master)
-* a479fae - (0 seconds ago) drabina - Michal Bojanowski 
-* 67aff45 - (0 seconds ago) kominiarz - szef 
-* d9cc67e - (0 seconds ago) Wers o gruszce - szef 
-* 25c91e4 - (0 seconds ago) Pierwsze wersje plików - szef </code></pre>
-<p>Pracownik chce włączyć swoje zmiany do <code>master</code>. W tym celu musi zaktualizować swoje repo.</p>
+   e1c88e0..7afc2e5  master -&gt; master
+szef:./szef$ git lgm
+* 7afc2e5 - (0 seconds ago) fikumiku - Michal Bojanowski  (HEAD, origin/master, origin/HEAD, master)
+* bd86d63 - (0 seconds ago) drabina - Michal Bojanowski 
+* e1c88e0 - (1 second ago) kominiarz - szef 
+* 14a2152 - (1 second ago) Wers o gruszce - szef 
+* 45e731a - (1 second ago) Pierwsze wersje plików - szef </code></pre>
+<p>W między czasie pracownik2 sklonował sobie forka</p>
+<pre><code>pracownik2:.$ git clone fork-pracownik1 pracownik2
+Cloning into 'pracownik2'...
+done.
+pracownik2:.$ cd pracownik2
+pracownik2:./pracownik2$ git checkout gruszka
+Switched to a new branch 'gruszka'
+Branch gruszka set up to track remote branch gruszka from origin.
+pracownik2:./pracownik2$ git lgm
+* c958b28 - (0 seconds ago) śliweczka - pracownik1  (HEAD, origin/gruszka, gruszka)
+* 6aec2a0 - (1 second ago) jabłuszka - pracownik1 
+* e1c88e0 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD, master)
+* 14a2152 - (1 second ago) Wers o gruszce - szef 
+* 45e731a - (1 second ago) Pierwsze wersje plików - szef </code></pre>
+<p>Pracownik1 chce kontynuować swoją pracę, ale bazować na zmianach dokonanych przez szefa. W tym celu musi zaktualizować swoje repo.</p>
 <p>Dodajemy główne repo projektu jako remote (pod nazwą <code>upstream</code>) ściągamy (<code>fetch</code>) i mergujemy (<code>pull</code>) zmiany z <code>upstream/master</code>.</p>
-<pre><code>pracownik:.$ cd pracownik
-pracownik:./pracownik$ git remote add upstream ../projekt.git
-pracownik:./pracownik$ git fetch upstream
+<pre><code>pracownik1:.$ cd pracownik1
+pracownik1:./pracownik1$ git remote add upstream ../projekt.git
+pracownik1:./pracownik1$ git fetch upstream
 From ../projekt
  * [new branch]      master     -&gt; upstream/master
-pracownik:./pracownik$ git checkout master
+pracownik1:./pracownik1$ git checkout master
 Switched to branch 'master'
 Your branch is up-to-date with 'origin/master'.
-pracownik:./pracownik$ git pull upstream master
+pracownik1:./pracownik1$ git pull upstream master
 From ../projekt
  * branch            master     -&gt; FETCH_HEAD
-Updating 67aff45..ed38d05
+Updating e1c88e0..7afc2e5
 Fast-forward
  plik2.txt | 2 ++
  1 file changed, 2 insertions(+)
-pracownik:./pracownik$ git lgm
-* 3f083ff - (0 seconds ago) śliweczka - pracownik  (origin/gruszka, gruszka)
-* 118eee4 - (0 seconds ago) jabłuszka - pracownik 
-| * ed38d05 - (0 seconds ago) fikumiku - Michal Bojanowski  (HEAD, upstream/master, master)
-| * a479fae - (0 seconds ago) drabina - Michal Bojanowski 
+pracownik1:./pracownik1$ git lgm
+* c958b28 - (0 seconds ago) śliweczka - pracownik1  (origin/gruszka, gruszka)
+* 6aec2a0 - (1 second ago) jabłuszka - pracownik1 
+| * 7afc2e5 - (0 seconds ago) fikumiku - Michal Bojanowski  (HEAD, upstream/master, master)
+| * bd86d63 - (0 seconds ago) drabina - Michal Bojanowski 
 |/  
-* 67aff45 - (0 seconds ago) kominiarz - szef  (origin/master, origin/HEAD)
-* d9cc67e - (0 seconds ago) Wers o gruszce - szef 
-* 25c91e4 - (0 seconds ago) Pierwsze wersje plików - szef </code></pre>
-<p>Gałęzie <code>upstream/master</code> i <code>mojezmiany</code> się rozgałęziają ponieważ pracownik i szef pracowali równolegle.</p>
-<p>Przepisujemy zmiany w <code>mojezmiany</code> nad <code>upstream/master</code></p>
-<pre><code>pracownik:.$ git clone fork-pracownik.git pracownik2
-Cloning into 'pracownik2'...
-done.
-pracownik:.$ cd pracownik2
-pracownik:./pracownik2$ git remote add upstream ../projekt.git
-pracownik:./pracownik2$ git fetch upstream
-From ../projekt
- * [new branch]      master     -&gt; upstream/master
-pracownik:./pracownik2$ git lgm
-* 3f083ff - (0 seconds ago) śliweczka - pracownik  (origin/gruszka)
-* 118eee4 - (0 seconds ago) jabłuszka - pracownik 
-| * ed38d05 - (0 seconds ago) fikumiku - Michal Bojanowski  (upstream/master)
-| * a479fae - (0 seconds ago) drabina - Michal Bojanowski 
+* e1c88e0 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD)
+* 14a2152 - (1 second ago) Wers o gruszce - szef 
+* 45e731a - (1 second ago) Pierwsze wersje plików - szef </code></pre>
+<p>Gałęzie <code>upstream/master</code> i <code>gruszka</code> się rozgałęziają ponieważ pracownik1 i szef pracowali równolegle.</p>
+<p>Przepisujemy zmiany w <code>gruszka</code> nad <code>upstream/master</code></p>
+<pre><code>pracownik1:.$ cd pracownik1
+pracownik1:./pracownik1$ git lgm
+* c958b28 - (0 seconds ago) śliweczka - pracownik1  (origin/gruszka, gruszka)
+* 6aec2a0 - (1 second ago) jabłuszka - pracownik1 
+| * 7afc2e5 - (0 seconds ago) fikumiku - Michal Bojanowski  (HEAD, upstream/master, master)
+| * bd86d63 - (0 seconds ago) drabina - Michal Bojanowski 
 |/  
-* 67aff45 - (0 seconds ago) kominiarz - szef  (HEAD, origin/master, origin/HEAD, master)
-* d9cc67e - (0 seconds ago) Wers o gruszce - szef 
-* 25c91e4 - (0 seconds ago) Pierwsze wersje plików - szef pracownik:./pracownik2$ git checkout gruszka
-Switched to a new branch 'gruszka'
-Branch gruszka set up to track remote branch gruszka from origin.
-pracownik:./pracownik2$ git pull --rebase upstream master
+* e1c88e0 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD)
+* 14a2152 - (1 second ago) Wers o gruszce - szef 
+* 45e731a - (1 second ago) Pierwsze wersje plików - szef pracownik1:./pracownik1$ git checkout gruszka
+Switched to branch 'gruszka'
+pracownik1:./pracownik1$ git pull --rebase upstream master
 From ../projekt
  * branch            master     -&gt; FETCH_HEAD
 First, rewinding head to replay your work on top of it...
 Applying: jabłuszka
 Applying: śliweczka
-pracownik:./pracownik2$ git lgm
-* 2343fe8 - (0 seconds ago) śliweczka - pracownik  (HEAD, gruszka)
-* acdc5dd - (0 seconds ago) jabłuszka - pracownik 
-* ed38d05 - (0 seconds ago) fikumiku - Michal Bojanowski  (upstream/master)
-* a479fae - (0 seconds ago) drabina - Michal Bojanowski 
-| * 3f083ff - (0 seconds ago) śliweczka - pracownik  (origin/gruszka)
-| * 118eee4 - (0 seconds ago) jabłuszka - pracownik 
+pracownik1:./pracownik1$ git lgm
+* 5c33022 - (0 seconds ago) śliweczka - pracownik1  (HEAD, gruszka)
+* 8c86e1b - (1 second ago) jabłuszka - pracownik1 
+* 7afc2e5 - (0 seconds ago) fikumiku - Michal Bojanowski  (upstream/master, master)
+* bd86d63 - (0 seconds ago) drabina - Michal Bojanowski 
+| * c958b28 - (0 seconds ago) śliweczka - pracownik1  (origin/gruszka)
+| * 6aec2a0 - (1 second ago) jabłuszka - pracownik1 
 |/  
-* 67aff45 - (0 seconds ago) kominiarz - szef  (origin/master, origin/HEAD, master)
-* d9cc67e - (0 seconds ago) Wers o gruszce - szef 
-* 25c91e4 - (0 seconds ago) Pierwsze wersje plików - szef </code></pre>
+* e1c88e0 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD)
+* 14a2152 - (1 second ago) Wers o gruszce - szef 
+* 45e731a - (1 second ago) Pierwsze wersje plików - szef </code></pre>
 <p>Gruszka ma w sobie zmiany z mastera.</p>
 <p>wypychamy</p>
-<pre><code>pracownik:.$ cd pracownik2
-pracownik:./pracownik2$ git checkout gruszka
+<pre><code>pracownik1:.$ cd pracownik1
+pracownik1:./pracownik1$ git checkout gruszka
 Already on 'gruszka'
-Your branch and 'origin/gruszka' have diverged,
-and have 4 and 2 different commits each, respectively.
-  (use &quot;git pull&quot; to merge the remote branch into yours)
-pracownik:./pracownik2$ git rebase origin/gruszka
+pracownik1:./pracownik1$ git rebase origin/gruszka
 First, rewinding head to replay your work on top of it...
 Applying: drabina
 Applying: fikumiku
-pracownik:./pracownik2$ git lgm
-* d910a4e - (0 seconds ago) fikumiku - Michal Bojanowski  (HEAD, gruszka)
-* 3bc9408 - (0 seconds ago) drabina - Michal Bojanowski 
-* 3f083ff - (0 seconds ago) śliweczka - pracownik  (origin/gruszka)
-* 118eee4 - (0 seconds ago) jabłuszka - pracownik 
-| * ed38d05 - (0 seconds ago) fikumiku - Michal Bojanowski  (upstream/master)
-| * a479fae - (0 seconds ago) drabina - Michal Bojanowski 
+pracownik1:./pracownik1$ git lgm
+* abf4d96 - (0 seconds ago) fikumiku - Michal Bojanowski  (HEAD, gruszka)
+* 3f04787 - (0 seconds ago) drabina - Michal Bojanowski 
+* c958b28 - (0 seconds ago) śliweczka - pracownik1  (origin/gruszka)
+* 6aec2a0 - (1 second ago) jabłuszka - pracownik1 
+| * 7afc2e5 - (0 seconds ago) fikumiku - Michal Bojanowski  (upstream/master, master)
+| * bd86d63 - (0 seconds ago) drabina - Michal Bojanowski 
 |/  
-* 67aff45 - (0 seconds ago) kominiarz - szef  (origin/master, origin/HEAD, master)
-* d9cc67e - (0 seconds ago) Wers o gruszce - szef 
-* 25c91e4 - (0 seconds ago) Pierwsze wersje plików - szef pracownik:./pracownik2$ git push origin gruszka
-To /home/mbojan/Documents/projects/gitjestgit/fork-pracownik.git
-   3f083ff..d910a4e  gruszka -&gt; gruszka</code></pre>
-<p>teraz pracownik1</p>
-<pre><code>pracownik:.$ cd pracownik
-pracownik:./pracownik$ git checkout gruszka
-Switched to branch 'gruszka'
-pracownik:./pracownik$ git pull origin gruszka
-From /home/mbojan/Documents/projects/gitjestgit/fork-pracownik
- * branch            gruszka    -&gt; FETCH_HEAD
-   3f083ff..d910a4e  gruszka    -&gt; origin/gruszka
-Updating 3f083ff..d910a4e
-Fast-forward
- plik2.txt | 2 ++
- 1 file changed, 2 insertions(+)
-pracownik:./pracownik$ git lgm
-* d910a4e - (1 second ago) fikumiku - Michal Bojanowski  (HEAD, origin/gruszka, gruszka)
-* 3bc9408 - (1 second ago) drabina - Michal Bojanowski 
-* 3f083ff - (1 second ago) śliweczka - pracownik 
-* 118eee4 - (1 second ago) jabłuszka - pracownik 
-| * ed38d05 - (1 second ago) fikumiku - Michal Bojanowski  (upstream/master, master)
-| * a479fae - (1 second ago) drabina - Michal Bojanowski 
+* e1c88e0 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD)
+* 14a2152 - (1 second ago) Wers o gruszce - szef 
+* 45e731a - (1 second ago) Pierwsze wersje plików - szef pracownik1:./pracownik1$ git push origin gruszka
+To /home/mbojan/Documents/projects/gitjestgit/fork-pracownik1.git
+   c958b28..abf4d96  gruszka -&gt; gruszka
+pracownik1:./pracownik1$ git lgm
+* abf4d96 - (0 seconds ago) fikumiku - Michal Bojanowski  (HEAD, origin/gruszka, gruszka)
+* 3f04787 - (0 seconds ago) drabina - Michal Bojanowski 
+* c958b28 - (0 seconds ago) śliweczka - pracownik1 
+* 6aec2a0 - (1 second ago) jabłuszka - pracownik1 
+| * 7afc2e5 - (0 seconds ago) fikumiku - Michal Bojanowski  (upstream/master, master)
+| * bd86d63 - (0 seconds ago) drabina - Michal Bojanowski 
 |/  
-* 67aff45 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD)
-* d9cc67e - (1 second ago) Wers o gruszce - szef 
-* 25c91e4 - (1 second ago) Pierwsze wersje plików - szef </code></pre>
-<p>final merge</p>
-<pre><code>pracownik:.$ cd pracownik
-pracownik:./pracownik$ git checkout gruszka
-Already on 'gruszka'
-pracownik:./pracownik$ git rebase master
-First, rewinding head to replay your work on top of it...
-Applying: jabłuszka
-Applying: śliweczka
-pracownik:./pracownik$ git lgm
-* f800b71 - (1 second ago) śliweczka - pracownik  (HEAD, gruszka)
-* dea6992 - (1 second ago) jabłuszka - pracownik 
-* ed38d05 - (1 second ago) fikumiku - Michal Bojanowski  (upstream/master, master)
-* a479fae - (1 second ago) drabina - Michal Bojanowski 
-| * d910a4e - (1 second ago) fikumiku - Michal Bojanowski  (origin/gruszka)
-| * 3bc9408 - (1 second ago) drabina - Michal Bojanowski 
-| * 3f083ff - (1 second ago) śliweczka - pracownik 
-| * 118eee4 - (1 second ago) jabłuszka - pracownik 
-|/  
-* 67aff45 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD)
-* d9cc67e - (1 second ago) Wers o gruszce - szef 
-* 25c91e4 - (1 second ago) Pierwsze wersje plików - szef pracownik:./pracownik$ git checkout master
-Switched to branch 'master'
-Your branch is ahead of 'origin/master' by 2 commits.
-  (use &quot;git push&quot; to publish your local commits)
-pracownik:./pracownik$ git merge gruszka
-Updating ed38d05..f800b71
-Fast-forward
- plik1.txt | 2 ++
- 1 file changed, 2 insertions(+)
-pracownik:./pracownik$ git lgm
-* f800b71 - (1 second ago) śliweczka - pracownik  (HEAD, master, gruszka)
-* dea6992 - (1 second ago) jabłuszka - pracownik 
-* ed38d05 - (1 second ago) fikumiku - Michal Bojanowski  (upstream/master)
-* a479fae - (1 second ago) drabina - Michal Bojanowski 
-| * d910a4e - (1 second ago) fikumiku - Michal Bojanowski  (origin/gruszka)
-| * 3bc9408 - (1 second ago) drabina - Michal Bojanowski 
-| * 3f083ff - (1 second ago) śliweczka - pracownik 
-| * 118eee4 - (1 second ago) jabłuszka - pracownik 
-|/  
-* 67aff45 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD)
-* d9cc67e - (1 second ago) Wers o gruszce - szef 
-* 25c91e4 - (1 second ago) Pierwsze wersje plików - szef </code></pre>
+* e1c88e0 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD)
+* 14a2152 - (1 second ago) Wers o gruszce - szef 
+* 45e731a - (1 second ago) Pierwsze wersje plików - szef </code></pre>
+<p>Meanwhile, pracownik2 chce zacząć pracować. Zaczyna od update-u</p>
+<pre><code>pracownik2:.$ cd pracownik2
+pracownik2:./pracownik2$ git remote update
+Fetching origin
+From /home/mbojan/Documents/projects/gitjestgit/fork-pracownik1
+   c958b28..abf4d96  gruszka    -&gt; origin/gruszka
+pracownik2:./pracownik2$ git lgm
+* abf4d96 - (0 seconds ago) fikumiku - Michal Bojanowski  (origin/gruszka)
+* 3f04787 - (0 seconds ago) drabina - Michal Bojanowski 
+* c958b28 - (0 seconds ago) śliweczka - pracownik1  (HEAD, gruszka)
+* 6aec2a0 - (1 second ago) jabłuszka - pracownik1 
+* e1c88e0 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD, master)
+* 14a2152 - (1 second ago) Wers o gruszce - szef 
+* 45e731a - (1 second ago) Pierwsze wersje plików - szef </code></pre>
 </div>
 </div>
 

@@ -23,9 +23,14 @@ pr <- function(user=NULL) {
 
 opts_chunk$set(engine="bash", comment="", engine.env=pr(), echo=FALSE,
                comment=NA, engine.opts="-x")
+
+# Czy pokazywać wszystko?
+verbose <- TRUE
 ```
 
-
+```{r, gitalias}
+git config --global alias.lgm "log --graph --all --format=format:'%h - (%ar) %s - %an %d' --abbrev-commit --date=relative"
+```
 
 
 
@@ -160,36 +165,51 @@ git push origin
 
 ## Rebase i ff-merge publicznego brancha?
 
-Mamy repo `projekt.git`.
+Publiczny feature branch się przydaje jeżeli pracujemy nad nim z więcej niż
+jednego komputera.
 
-Na github robimy forka. Niech nazywa się `fork-pracownik.git`
+Scenariusz
+
+1. szef pracuje ma `master` nieustannie
+2. pracownik1 robi branch `gruszka` i tam robi komity
+3. Branch gruszka jest `push`owany do repo
+4. pracownik2 aktualizuje `gruszka` do aktualnego stanu `master` i dodaje swoje komity.
+5. pracownik2 pushuje `gruszka` do repo
+6. pracownik1 chce kontynuować pracę na `gruszka` po zmianach pracownik2, łącznie z aktualizowaniem do aktualnego `master`
+7. Kroki 4-6 się powtarzają.
+8. Praca na `gruszka` jest mergowana z `master`.
+
+Pracownik1 i pracownik2 to mogą być różne osoby, albo ta sama osoba pracująca na dwóch różnych komputerach. Tutaj zakładamy, że to ta sama osoba (pracuje na jednym forku głównego repozytorium).
+
+Główne repozytorium projektu na github to `projekt.git`.
+
+Na github pracownik1 robi forka. Niech nazywa się `fork-pracownik1.git`
 
 ```{r, fake_fork}
-git init --bare fork-pracownik.git
+git init --bare fork-pracownik1.git
 git clone projekt.git
 cd projekt
-git remote add fork ../fork-pracownik.git
+git remote add fork ../fork-pracownik1.git
 git push fork master
 cd ..
 rm -rf projekt
 ```
 
-Klonujemy forka. robimy brancha i pracujemy na nim.
+Pracownik1 klonuje forka. 
 
-
-```{r, engine.env=pr("pracownik")}
-git clone fork-pracownik.git pracownik
+```{r, engine.env=pr("pracownik1")}
+git clone fork-pracownik1.git pracownik1
 ```
 
 ```{r}
-cd pracownik
-git config user.name pracownik
+cd pracownik1
+git config user.name pracownik1
 ```
 
-
+Robi brancha `gruszka` i pracuje na nim. Na koniec dnia wypycha branch `gruszka` do forka na githubie.
 
 ```{r, engine.env=pr("pracownik")}
-cd pracownik
+cd pracownik1
 git checkout -b gruszka
 echo "A za gruszką dwa jabłuszka," >> plik1.txt
 git add plik1.txt
@@ -199,15 +219,14 @@ git add plik1.txt
 git commit -m "śliweczka"
 git lgm
 git push origin gruszka
-
 ```
 
 W między czasie szef pracował na masterze.
 
 
 ```{r, engine.env=pr("szef")}
-git clone projekt.git projekt-szef
-cd projekt-szef
+git clone projekt.git szef
+cd szef
 echo "Po drabinie," >> plik2.txt
 git add plik2.txt
 git commit -m "drabina"
@@ -219,13 +238,26 @@ git push origin master
 git lgm
 ```
 
-Pracownik chce włączyć swoje zmiany do `master`. W tym celu musi zaktualizować swoje repo.
+W między czasie pracownik2 sklonował sobie forka
+
+```{r, engine.env=pr("pracownik2")}
+git clone fork-pracownik1 pracownik2
+cd pracownik2
+git checkout gruszka
+git lgm
+```
+
+
+
+
+
+Pracownik1 chce kontynuować swoją pracę, ale bazować na zmianach dokonanych przez szefa. W tym celu musi zaktualizować swoje repo.
 
 Dodajemy główne repo projektu jako remote (pod nazwą `upstream`) ściągamy
 (`fetch`) i mergujemy (`pull`) zmiany z `upstream/master`.
 
-```{r, engine.env=pr("pracownik")}
-cd pracownik
+```{r, engine.env=pr("pracownik1")}
+cd pracownik1
 git remote add upstream ../projekt.git
 git fetch upstream
 # update lokalnego mastera
@@ -234,16 +266,13 @@ git pull upstream master
 git lgm
 ```
 
-Gałęzie `upstream/master` i `mojezmiany` się rozgałęziają ponieważ pracownik i
+Gałęzie `upstream/master` i `gruszka` się rozgałęziają ponieważ pracownik1 i
 szef pracowali równolegle.
 
-Przepisujemy zmiany w `mojezmiany` nad `upstream/master`
+Przepisujemy zmiany w `gruszka` nad `upstream/master`
 
-```{r, engine.env=pr("pracownik")}
-git clone fork-pracownik.git pracownik2
-cd pracownik2
-git remote add upstream ../projekt.git
-git fetch upstream
+```{r, engine.env=pr("pracownik1")}
+cd pracownik1
 git lgm
 git checkout gruszka
 git pull --rebase upstream master
@@ -254,34 +283,19 @@ Gruszka ma w sobie zmiany z mastera.
 
 wypychamy
 
-```{r, engine.env=pr("pracownik")}
-cd pracownik2
+```{r, engine.env=pr("pracownik1")}
+cd pracownik1
 git checkout gruszka
 git rebase origin/gruszka
 git lgm
 git push origin gruszka
-```
-
-
-teraz pracownik1
-
-```{r, engine.env=pr("pracownik")}
-cd pracownik
-git checkout gruszka
-git pull origin gruszka
 git lgm
 ```
 
-final merge
+Meanwhile, pracownik2 chce zacząć pracować. Zaczyna od update-u
 
-```{r, engine.env=pr("pracownik")}
-cd pracownik
-git checkout gruszka
-git rebase master
-git lgm
-git checkout master
-git merge gruszka
+```{r, engine.env=pr("pracownik2")}
+cd pracownik2
+git remote update
 git lgm
 ```
-
-
