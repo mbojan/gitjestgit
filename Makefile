@@ -27,6 +27,8 @@ Rscript -e 'rmarkdown::render("$<")'
 endef
 
 
+
+
 #============================================================================ 
 # Rules
 
@@ -63,3 +65,9 @@ clean:
 .PHONY: proof
 proof:
 	htmlproof . --verbose --ext .html --alt-ignore /figure-html/
+
+
+
+.PHONY: pkgs
+pkgs:
+	Rscript -e 'for(p in c("knitr")) devtools::with_lib("lib", devtools::install(file.path("pkgs", p)))'
