@@ -3,8 +3,12 @@ title: Git jest git
 author: Michał Bojanowski
 output:
   html_document:
+    highlight: pygments
+    number_sections: true
     toc: true
     self_contained: true
+---
+
 ---
 
 ```{r, check_commands, results="hide", echo=FALSE}
@@ -30,6 +34,11 @@ verbose <- TRUE
 
 ```{r, gitalias}
 git config --global alias.lgm "log --graph --all --format=format:'%h - (%ar) %s - %an %d' --abbrev-commit --date=relative"
+```
+
+
+```{r test, engine.env="PS4='dupa'", echo=TRUE}
+echo "To pisze dupa"
 ```
 
 
@@ -89,6 +98,7 @@ git config user.name szef
 git config user.email szef@korpo.com
 ```
 
+Na wstępie repozytorium zawiera następujące pliki
 
 ```{r, zapisz_pliki, engine="R"}
 cat(plik1, file="projekt/plik1.txt")
@@ -114,6 +124,7 @@ rm -rf projekt
 
 
 # Praca w pojedynke
+
 
 Klonujemy za pomocą URL ze strony github.
 
