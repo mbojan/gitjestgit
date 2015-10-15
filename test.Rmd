@@ -1,0 +1,42 @@
+---
+title: Git jest git
+author: Michał Bojanowski
+output:
+  html_document:
+    highlight: pygments
+    number_sections: true
+    toc: true
+    self_contained: true
+---
+
+---
+
+```{r, check_commands, results="hide", echo=FALSE}
+# check if necessary commands are present
+cmd <- c("bash", "sh", "git")
+r <- sapply(cmd, Sys.which)
+empty <- r == ""
+if( any(empty) ) 
+  stop(paste("some commands are not available: ", paste(cmd[empty], collapse=", ")))
+
+library(knitr) # dev version
+pr <- function(user=NULL) {
+  u <- if(is.null(user)) "" else paste0(user, ":")
+  paste0("PS4=", u, sQuote('$(pwd | sed s/^.*gitjestgit/./)\\$ ') )
+}
+
+opts_chunk$set(engine="bash", comment="", engine.env=pr(), echo=FALSE,
+               comment=NA, engine.opts="-x")
+
+# Czy pokazywać wszystko?
+verbose <- TRUE
+```
+
+```{r, gitalias}
+git config --global alias.lgm "log --graph --all --format=format:'%h - (%ar) %s - %an %d' --abbrev-commit --date=relative"
+```
+
+
+```{r test, engine.env="PS4='dupa'", echo=TRUE}
+echo "To pisze dupa"
+```
