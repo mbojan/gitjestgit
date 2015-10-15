@@ -1,5 +1,5 @@
 # pliki
-files:=gitjestgit
+files:=gitjestgit test_runr
 to_clean:=projekt projekt.git fork-pracownik1.git pracownik1 szef pracownik2
 
 .PHONY: default
