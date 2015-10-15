@@ -1,0 +1,3 @@
+[submodule "src/knitr"]
+	path = src/knitr
+	url = git@github.com:mbojan/knitr.git
