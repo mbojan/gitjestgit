@@ -25,6 +25,14 @@ pr <- function(user=NULL) {
   paste0("PS4=", u, sQuote('$(pwd | sed s/^.*gitjestgit/./)\\$ ') )
 }
 
+
+
+hook.t <- function(x, options) {
+  paste("\n\n```text\n", x, 
+        "```\n\n", sep = "")
+}
+
+
 opts_chunk$set(
   engine="bash", 
   engine.opts="-x",
@@ -33,6 +41,8 @@ opts_chunk$set(
   echo=FALSE,
   comment=NA
 )
+
+knit_hooks$set( output=hook.t )
 ```
 
 ```{bash gitalias}
