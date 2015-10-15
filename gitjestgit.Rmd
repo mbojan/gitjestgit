@@ -1,6 +1,7 @@
 ---
 title: Git jest git
-author: Michał Bojanowski
+author: "Michał Bojanowski <m.bojanowski@uw.edu.pl>"
+date: "`r Sys.Date()`"
 output:
   html_document:
     highlight: pygments
