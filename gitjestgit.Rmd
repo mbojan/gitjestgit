@@ -27,19 +27,13 @@ pr <- function(user=NULL) {
 
 opts_chunk$set(engine="bash", comment="", engine.env=pr(), echo=FALSE,
                comment=NA, engine.opts="-x")
-
-# Czy pokazywać wszystko?
-verbose <- TRUE
 ```
 
-```{r, gitalias}
+```{bash gitalias}
 git config --global alias.lgm "log --graph --all --format=format:'%h - (%ar) %s - %an %d' --abbrev-commit --date=relative"
 ```
 
 
-```{r test, engine.env="PS4='dupa'", echo=TRUE}
-echo "To pisze dupa"
-```
 
 
 

@@ -21,32 +21,6 @@
 <script src="data:application/x-javascript,%2F%2A%21%20Respond%2Ejs%20v1%2E4%2E2%3A%20min%2Fmax%2Dwidth%20media%20query%20polyfill%20%2A%20Copyright%202013%20Scott%20Jehl%0A%20%2A%20Licensed%20under%20https%3A%2F%2Fgithub%2Ecom%2Fscottjehl%2FRespond%2Fblob%2Fmaster%2FLICENSE%2DMIT%0A%20%2A%20%20%2A%2F%0A%0Aif%20%28%21%21window%2Enavigator%2EuserAgent%2Ematch%28%22MSIE%208%22%29%29%20%7B%0A%21function%28a%29%7B%22use%20strict%22%3Ba%2EmatchMedia%3Da%2EmatchMedia%7C%7Cfunction%28a%29%7Bvar%20b%2Cc%3Da%2EdocumentElement%2Cd%3Dc%2EfirstElementChild%7C%7Cc%2EfirstChild%2Ce%3Da%2EcreateElement%28%22body%22%29%2Cf%3Da%2EcreateElement%28%22div%22%29%3Breturn%20f%2Eid%3D%22mq%2Dtest%2D1%22%2Cf%2Estyle%2EcssText%3D%22position%3Aabsolute%3Btop%3A%2D100em%22%2Ce%2Estyle%2Ebackground%3D%22none%22%2Ce%2EappendChild%28f%29%2Cfunction%28a%29%7Breturn%20f%2EinnerHTML%3D%27%26shy%3B%3Cstyle%20media%3D%22%27%2Ba%2B%27%22%3E%20%23mq%2Dtest%2D1%20%7B%20width%3A%2042px%3B%20%7D%3C%2Fstyle%3E%27%2Cc%2EinsertBefore%28e%2Cd%29%2Cb%3D42%3D%3D%3Df%2EoffsetWidth%2Cc%2EremoveChild%28e%29%2C%7Bmatches%3Ab%2Cmedia%3Aa%7D%7D%7D%28a%2Edocument%29%7D%28this%29%2Cfunction%28a%29%7B%22use%20strict%22%3Bfunction%20b%28%29%7Bu%28%210%29%7Dvar%20c%3D%7B%7D%3Ba%2Erespond%3Dc%2Cc%2Eupdate%3Dfunction%28%29%7B%7D%3Bvar%20d%3D%5B%5D%2Ce%3Dfunction%28%29%7Bvar%20b%3D%211%3Btry%7Bb%3Dnew%20a%2EXMLHttpRequest%7Dcatch%28c%29%7Bb%3Dnew%20a%2EActiveXObject%28%22Microsoft%2EXMLHTTP%22%29%7Dreturn%20function%28%29%7Breturn%20b%7D%7D%28%29%2Cf%3Dfunction%28a%2Cb%29%7Bvar%20c%3De%28%29%3Bc%26%26%28c%2Eopen%28%22GET%22%2Ca%2C%210%29%2Cc%2Eonreadystatechange%3Dfunction%28%29%7B4%21%3D%3Dc%2EreadyState%7C%7C200%21%3D%3Dc%2Estatus%26%26304%21%3D%3Dc%2Estatus%7C%7Cb%28c%2EresponseText%29%7D%2C4%21%3D%3Dc%2EreadyState%26%26c%2Esend%28null%29%29%7D%3Bif%28c%2Eajax%3Df%2Cc%2Equeue%3Dd%2Cc%2Eregex%3D%7Bmedia%3A%2F%40media%5B%5E%5C%7B%5D%2B%5C%7B%28%5B%5E%5C%7B%5C%7D%5D%2A%5C%7B%5B%5E%5C%7D%5C%7B%5D%2A%5C%7D%29%2B%2Fgi%2Ckeyframes%3A%2F%40%28%3F%3A%5C%2D%28%3F%3Ao%7Cmoz%7Cwebkit%29%5C%2D%29%3Fkeyframes%5B%5E%5C%7B%5D%2B%5C%7B%28%3F%3A%5B%5E%5C%7B%5C%7D%5D%2A%5C%7B%5B%5E%5C%7D%5C%7B%5D%2A%5C%7D%29%2B%5B%5E%5C%7D%5D%2A%5C%7D%2Fgi%2Curls%3A%2F%28url%5C%28%29%5B%27%22%5D%3F%28%5B%5E%5C%2F%5C%29%27%22%5D%5B%5E%3A%5C%29%27%22%5D%2B%29%5B%27%22%5D%3F%28%5C%29%29%2Fg%2CfindStyles%3A%2F%40media%20%2A%28%5B%5E%5C%7B%5D%2B%29%5C%7B%28%5B%5CS%5Cs%5D%2B%3F%29%24%2F%2Conly%3A%2F%28only%5Cs%2B%29%3F%28%5Ba%2DzA%2DZ%5D%2B%29%5Cs%3F%2F%2Cminw%3A%2F%5C%28%5B%5Cs%5D%2Amin%5C%2Dwidth%5Cs%2A%3A%5B%5Cs%5D%2A%28%5B%5Cs%5D%2A%5B0%2D9%5C%2E%5D%2B%29%28px%7Cem%29%5B%5Cs%5D%2A%5C%29%2F%2Cmaxw%3A%2F%5C%28%5B%5Cs%5D%2Amax%5C%2Dwidth%5Cs%2A%3A%5B%5Cs%5D%2A%28%5B%5Cs%5D%2A%5B0%2D9%5C%2E%5D%2B%29%28px%7Cem%29%5B%5Cs%5D%2A%5C%29%2F%7D%2Cc%2EmediaQueriesSupported%3Da%2EmatchMedia%26%26null%21%3D%3Da%2EmatchMedia%28%22only%20all%22%29%26%26a%2EmatchMedia%28%22only%20all%22%29%2Ematches%2C%21c%2EmediaQueriesSupported%29%7Bvar%20g%2Ch%2Ci%2Cj%3Da%2Edocument%2Ck%3Dj%2EdocumentElement%2Cl%3D%5B%5D%2Cm%3D%5B%5D%2Cn%3D%5B%5D%2Co%3D%7B%7D%2Cp%3D30%2Cq%3Dj%2EgetElementsByTagName%28%22head%22%29%5B0%5D%7C%7Ck%2Cr%3Dj%2EgetElementsByTagName%28%22base%22%29%5B0%5D%2Cs%3Dq%2EgetElementsByTagName%28%22link%22%29%2Ct%3Dfunction%28%29%7Bvar%20a%2Cb%3Dj%2EcreateElement%28%22div%22%29%2Cc%3Dj%2Ebody%2Cd%3Dk%2Estyle%2EfontSize%2Ce%3Dc%26%26c%2Estyle%2EfontSize%2Cf%3D%211%3Breturn%20b%2Estyle%2EcssText%3D%22position%3Aabsolute%3Bfont%2Dsize%3A1em%3Bwidth%3A1em%22%2Cc%7C%7C%28c%3Df%3Dj%2EcreateElement%28%22body%22%29%2Cc%2Estyle%2Ebackground%3D%22none%22%29%2Ck%2Estyle%2EfontSize%3D%22100%25%22%2Cc%2Estyle%2EfontSize%3D%22100%25%22%2Cc%2EappendChild%28b%29%2Cf%26%26k%2EinsertBefore%28c%2Ck%2EfirstChild%29%2Ca%3Db%2EoffsetWidth%2Cf%3Fk%2EremoveChild%28c%29%3Ac%2EremoveChild%28b%29%2Ck%2Estyle%2EfontSize%3Dd%2Ce%26%26%28c%2Estyle%2EfontSize%3De%29%2Ca%3Di%3DparseFloat%28a%29%7D%2Cu%3Dfunction%28b%29%7Bvar%20c%3D%22clientWidth%22%2Cd%3Dk%5Bc%5D%2Ce%3D%22CSS1Compat%22%3D%3D%3Dj%2EcompatMode%26%26d%7C%7Cj%2Ebody%5Bc%5D%7C%7Cd%2Cf%3D%7B%7D%2Co%3Ds%5Bs%2Elength%2D1%5D%2Cr%3D%28new%20Date%29%2EgetTime%28%29%3Bif%28b%26%26g%26%26p%3Er%2Dg%29return%20a%2EclearTimeout%28h%29%2Ch%3Da%2EsetTimeout%28u%2Cp%29%2Cvoid%200%3Bg%3Dr%3Bfor%28var%20v%20in%20l%29if%28l%2EhasOwnProperty%28v%29%29%7Bvar%20w%3Dl%5Bv%5D%2Cx%3Dw%2Eminw%2Cy%3Dw%2Emaxw%2Cz%3Dnull%3D%3D%3Dx%2CA%3Dnull%3D%3D%3Dy%2CB%3D%22em%22%3Bx%26%26%28x%3DparseFloat%28x%29%2A%28x%2EindexOf%28B%29%3E%2D1%3Fi%7C%7Ct%28%29%3A1%29%29%2Cy%26%26%28y%3DparseFloat%28y%29%2A%28y%2EindexOf%28B%29%3E%2D1%3Fi%7C%7Ct%28%29%3A1%29%29%2Cw%2Ehasquery%26%26%28z%26%26A%7C%7C%21%28z%7C%7Ce%3E%3Dx%29%7C%7C%21%28A%7C%7Cy%3E%3De%29%29%7C%7C%28f%5Bw%2Emedia%5D%7C%7C%28f%5Bw%2Emedia%5D%3D%5B%5D%29%2Cf%5Bw%2Emedia%5D%2Epush%28m%5Bw%2Erules%5D%29%29%7Dfor%28var%20C%20in%20n%29n%2EhasOwnProperty%28C%29%26%26n%5BC%5D%26%26n%5BC%5D%2EparentNode%3D%3D%3Dq%26%26q%2EremoveChild%28n%5BC%5D%29%3Bn%2Elength%3D0%3Bfor%28var%20D%20in%20f%29if%28f%2EhasOwnProperty%28D%29%29%7Bvar%20E%3Dj%2EcreateElement%28%22style%22%29%2CF%3Df%5BD%5D%2Ejoin%28%22%5Cn%22%29%3BE%2Etype%3D%22text%2Fcss%22%2CE%2Emedia%3DD%2Cq%2EinsertBefore%28E%2Co%2EnextSibling%29%2CE%2EstyleSheet%3FE%2EstyleSheet%2EcssText%3DF%3AE%2EappendChild%28j%2EcreateTextNode%28F%29%29%2Cn%2Epush%28E%29%7D%7D%2Cv%3Dfunction%28a%2Cb%2Cd%29%7Bvar%20e%3Da%2Ereplace%28c%2Eregex%2Ekeyframes%2C%22%22%29%2Ematch%28c%2Eregex%2Emedia%29%2Cf%3De%26%26e%2Elength%7C%7C0%3Bb%3Db%2Esubstring%280%2Cb%2ElastIndexOf%28%22%2F%22%29%29%3Bvar%20g%3Dfunction%28a%29%7Breturn%20a%2Ereplace%28c%2Eregex%2Eurls%2C%22%241%22%2Bb%2B%22%242%243%22%29%7D%2Ch%3D%21f%26%26d%3Bb%2Elength%26%26%28b%2B%3D%22%2F%22%29%2Ch%26%26%28f%3D1%29%3Bfor%28var%20i%3D0%3Bf%3Ei%3Bi%2B%2B%29%7Bvar%20j%2Ck%2Cn%2Co%3Bh%3F%28j%3Dd%2Cm%2Epush%28g%28a%29%29%29%3A%28j%3De%5Bi%5D%2Ematch%28c%2Eregex%2EfindStyles%29%26%26RegExp%2E%241%2Cm%2Epush%28RegExp%2E%242%26%26g%28RegExp%2E%242%29%29%29%2Cn%3Dj%2Esplit%28%22%2C%22%29%2Co%3Dn%2Elength%3Bfor%28var%20p%3D0%3Bo%3Ep%3Bp%2B%2B%29k%3Dn%5Bp%5D%2Cl%2Epush%28%7Bmedia%3Ak%2Esplit%28%22%28%22%29%5B0%5D%2Ematch%28c%2Eregex%2Eonly%29%26%26RegExp%2E%242%7C%7C%22all%22%2Crules%3Am%2Elength%2D1%2Chasquery%3Ak%2EindexOf%28%22%28%22%29%3E%2D1%2Cminw%3Ak%2Ematch%28c%2Eregex%2Eminw%29%26%26parseFloat%28RegExp%2E%241%29%2B%28RegExp%2E%242%7C%7C%22%22%29%2Cmaxw%3Ak%2Ematch%28c%2Eregex%2Emaxw%29%26%26parseFloat%28RegExp%2E%241%29%2B%28RegExp%2E%242%7C%7C%22%22%29%7D%29%7Du%28%29%7D%2Cw%3Dfunction%28%29%7Bif%28d%2Elength%29%7Bvar%20b%3Dd%2Eshift%28%29%3Bf%28b%2Ehref%2Cfunction%28c%29%7Bv%28c%2Cb%2Ehref%2Cb%2Emedia%29%2Co%5Bb%2Ehref%5D%3D%210%2Ca%2EsetTimeout%28function%28%29%7Bw%28%29%7D%2C0%29%7D%29%7D%7D%2Cx%3Dfunction%28%29%7Bfor%28var%20b%3D0%3Bb%3Cs%2Elength%3Bb%2B%2B%29%7Bvar%20c%3Ds%5Bb%5D%2Ce%3Dc%2Ehref%2Cf%3Dc%2Emedia%2Cg%3Dc%2Erel%26%26%22stylesheet%22%3D%3D%3Dc%2Erel%2EtoLowerCase%28%29%3Be%26%26g%26%26%21o%5Be%5D%26%26%28c%2EstyleSheet%26%26c%2EstyleSheet%2ErawCssText%3F%28v%28c%2EstyleSheet%2ErawCssText%2Ce%2Cf%29%2Co%5Be%5D%3D%210%29%3A%28%21%2F%5E%28%5Ba%2DzA%2DZ%3A%5D%2A%5C%2F%5C%2F%29%2F%2Etest%28e%29%26%26%21r%7C%7Ce%2Ereplace%28RegExp%2E%241%2C%22%22%29%2Esplit%28%22%2F%22%29%5B0%5D%3D%3D%3Da%2Elocation%2Ehost%29%26%26%28%22%2F%2F%22%3D%3D%3De%2Esubstring%280%2C2%29%26%26%28e%3Da%2Elocation%2Eprotocol%2Be%29%2Cd%2Epush%28%7Bhref%3Ae%2Cmedia%3Af%7D%29%29%29%7Dw%28%29%7D%3Bx%28%29%2Cc%2Eupdate%3Dx%2Cc%2EgetEmValue%3Dt%2Ca%2EaddEventListener%3Fa%2EaddEventListener%28%22resize%22%2Cb%2C%211%29%3Aa%2EattachEvent%26%26a%2EattachEvent%28%22onresize%22%2Cb%29%7D%7D%28this%29%3B%0A%7D%3B"></script>
 
 
-<style type="text/css">code{white-space: pre;}</style>
-<style type="text/css">
-table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
-  margin: 0; padding: 0; vertical-align: baseline; border: none; }
-table.sourceCode { width: 100%; line-height: 100%; }
-td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
-td.sourceCode { padding-left: 5px; }
-code > span.kw { color: #007020; font-weight: bold; }
-code > span.dt { color: #902000; }
-code > span.dv { color: #40a070; }
-code > span.bn { color: #40a070; }
-code > span.fl { color: #40a070; }
-code > span.ch { color: #4070a0; }
-code > span.st { color: #4070a0; }
-code > span.co { color: #60a0b0; font-style: italic; }
-code > span.ot { color: #007020; }
-code > span.al { color: #ff0000; font-weight: bold; }
-code > span.fu { color: #06287e; }
-code > span.er { color: #ff0000; font-weight: bold; }
-</style>
-<style type="text/css">
-  pre:not([class]) {
-    background-color: white;
-  }
-</style>
-
 
 
 </head>
@@ -92,10 +66,7 @@ img {
 </div>
 
 <hr />
-<pre><code>+ git config --global alias.lgm 'log --graph --all --format=format:'\''%h - (%ar) %s - %an %d'\'' --abbrev-commit --date=relative'</code></pre>
-<pre class="sourceCode bash"><code class="sourceCode bash"><span class="kw">echo</span> <span class="st">&quot;To pisze dupa&quot;</span></code></pre>
-<pre><code>+ echo 'To pisze dupa'
-To pisze dupa</code></pre>
+<pre><code>.$ git config --global alias.lgm 'log --graph --all --format=format:'\''%h - (%ar) %s - %an %d'\'' --abbrev-commit --date=relative'</code></pre>
 <div id="wstep" class="section level1">
 <h1><span class="header-section-number">1</span> Wstęp</h1>
 <p>Praca z git bash.</p>
@@ -118,36 +89,36 @@ To pisze dupa</code></pre>
 <h1><span class="header-section-number">2</span> Repozytorium</h1>
 <p>Symulacja githuba.</p>
 <p>Główne repozytorium projektu na GitHubie.</p>
-<pre><code>+ git init --bare projekt.git
+<pre><code>.$ git init --bare projekt.git
 Initialized empty Git repository in /home/mbojan/Documents/projects/gitjestgit/projekt.git/
-+ git clone projekt.git
+.$ git clone projekt.git
 Cloning into 'projekt'...
 warning: You appear to have cloned an empty repository.
 done.
-+ cd projekt
-+ git config user.name szef
-+ git config user.email szef@korpo.com</code></pre>
+.$ cd projekt
+./projekt$ git config user.name szef
+./projekt$ git config user.email szef@korpo.com</code></pre>
 <p>Na wstępie repozytorium zawiera następujące pliki</p>
-<pre><code>+ cd projekt
-+ git add plik1.txt plik2.txt
-+ git commit -m 'Pierwsze wersje plików'
-[master (root-commit) 7e51962] Pierwsze wersje plików
+<pre><code>.$ cd projekt
+./projekt$ git add plik1.txt plik2.txt
+./projekt$ git commit -m 'Pierwsze wersje plików'
+[master (root-commit) 5a43cf2] Pierwsze wersje plików
  2 files changed, 12 insertions(+)
  create mode 100644 plik1.txt
  create mode 100644 plik2.txt
-+ echo 'Wpadła gruszka do fartuszka'
-+ git commit -am 'Wers o gruszce'
-[master 694ca7b] Wers o gruszce
+./projekt$ echo 'Wpadła gruszka do fartuszka'
+./projekt$ git commit -am 'Wers o gruszce'
+[master 4b8eb96] Wers o gruszce
  1 file changed, 1 insertion(+)
-+ echo 'Idzie kominiarz'
-+ git commit -am kominiarz
-[master 53fbe37] kominiarz
+./projekt$ echo 'Idzie kominiarz'
+./projekt$ git commit -am kominiarz
+[master f8ee2e9] kominiarz
  1 file changed, 1 insertion(+)
-+ git push origin master
+./projekt$ git push origin master
 To /home/mbojan/Documents/projects/gitjestgit/projekt.git
  * [new branch]      master -&gt; master
-+ cd ..
-+ rm -rf projekt</code></pre>
+./projekt$ cd ..
+.$ rm -rf projekt</code></pre>
 </div>
 <div id="praca-w-pojedynke" class="section level1">
 <h1><span class="header-section-number">3</span> Praca w pojedynke</h1>
@@ -197,187 +168,187 @@ git commit -m &quot;Zmieniłem plik1.txt&quot;
 <p>Pracownik1 i pracownik2 to mogą być różne osoby, albo ta sama osoba pracująca na dwóch różnych komputerach. Tutaj zakładamy, że to ta sama osoba (pracuje na jednym forku głównego repozytorium).</p>
 <p>Główne repozytorium projektu na github to <code>projekt.git</code>.</p>
 <p>Na github pracownik1 robi forka. Niech nazywa się <code>fork-pracownik1.git</code></p>
-<pre><code>+ git init --bare fork-pracownik1.git
+<pre><code>.$ git init --bare fork-pracownik1.git
 Initialized empty Git repository in /home/mbojan/Documents/projects/gitjestgit/fork-pracownik1.git/
-+ git clone projekt.git
+.$ git clone projekt.git
 Cloning into 'projekt'...
 done.
-+ cd projekt
-+ git remote add fork ../fork-pracownik1.git
-+ git push fork master
+.$ cd projekt
+./projekt$ git remote add fork ../fork-pracownik1.git
+./projekt$ git push fork master
 To ../fork-pracownik1.git
  * [new branch]      master -&gt; master
-+ cd ..
-+ rm -rf projekt</code></pre>
+./projekt$ cd ..
+.$ rm -rf projekt</code></pre>
 <p>Pracownik1 klonuje forka.</p>
-<pre><code>+ git clone fork-pracownik1.git pracownik1
+<pre><code>pracownik1:.$ git clone fork-pracownik1.git pracownik1
 Cloning into 'pracownik1'...
 done.</code></pre>
-<pre><code>+ cd pracownik1
-+ git config user.name pracownik1</code></pre>
+<pre><code>.$ cd pracownik1
+./pracownik1$ git config user.name pracownik1</code></pre>
 <p>Robi brancha <code>gruszka</code> i pracuje na nim. Na koniec dnia wypycha branch <code>gruszka</code> do forka na githubie.</p>
-<pre><code>+ cd pracownik1
-+ git checkout -b gruszka
+<pre><code>pracownik:.$ cd pracownik1
+pracownik:./pracownik1$ git checkout -b gruszka
 Switched to a new branch 'gruszka'
-+ echo 'A za gruszką dwa jabłuszka,'
-+ git add plik1.txt
-+ git commit -m jabłuszka
-[gruszka e5f29c3] jabłuszka
+pracownik:./pracownik1$ echo 'A za gruszką dwa jabłuszka,'
+pracownik:./pracownik1$ git add plik1.txt
+pracownik:./pracownik1$ git commit -m jabłuszka
+[gruszka c843f28] jabłuszka
  1 file changed, 1 insertion(+)
-+ echo 'Lecz śliweczka wpaść nie chicała'
-+ git add plik1.txt
-+ git commit -m śliweczka
-[gruszka 373e766] śliweczka
+pracownik:./pracownik1$ echo 'Lecz śliweczka wpaść nie chicała'
+pracownik:./pracownik1$ git add plik1.txt
+pracownik:./pracownik1$ git commit -m śliweczka
+[gruszka fe6fc48] śliweczka
  1 file changed, 1 insertion(+)
-+ git lgm
-* 373e766 - (0 seconds ago) śliweczka - pracownik1  (HEAD, gruszka)
-* e5f29c3 - (0 seconds ago) jabłuszka - pracownik1 
-* 53fbe37 - (0 seconds ago) kominiarz - szef  (origin/master, origin/HEAD, master)
-* 694ca7b - (0 seconds ago) Wers o gruszce - szef 
-* 7e51962 - (0 seconds ago) Pierwsze wersje plików - szef + git push origin gruszka
+pracownik:./pracownik1$ git lgm
+* fe6fc48 - (0 seconds ago) śliweczka - pracownik1  (HEAD, gruszka)
+* c843f28 - (0 seconds ago) jabłuszka - pracownik1 
+* f8ee2e9 - (0 seconds ago) kominiarz - szef  (origin/master, origin/HEAD, master)
+* 4b8eb96 - (0 seconds ago) Wers o gruszce - szef 
+* 5a43cf2 - (0 seconds ago) Pierwsze wersje plików - szef pracownik:./pracownik1$ git push origin gruszka
 To /home/mbojan/Documents/projects/gitjestgit/fork-pracownik1.git
  * [new branch]      gruszka -&gt; gruszka</code></pre>
 <p>W między czasie szef pracował na masterze.</p>
-<pre><code>+ git clone projekt.git szef
+<pre><code>szef:.$ git clone projekt.git szef
 Cloning into 'szef'...
 done.
-+ cd szef
-+ echo 'Po drabinie,'
-+ git add plik2.txt
-+ git commit -m drabina
-[master f809c2f] drabina
+szef:.$ cd szef
+szef:./szef$ echo 'Po drabinie,'
+szef:./szef$ git add plik2.txt
+szef:./szef$ git commit -m drabina
+[master 70c01cb] drabina
  1 file changed, 1 insertion(+)
-+ echo 'Fiku muku,'
-+ git add plik2.txt
-+ git commit -m fikumiku
-[master 84b5bc5] fikumiku
+szef:./szef$ echo 'Fiku muku,'
+szef:./szef$ git add plik2.txt
+szef:./szef$ git commit -m fikumiku
+[master 081dd3c] fikumiku
  1 file changed, 1 insertion(+)
-+ git push origin master
+szef:./szef$ git push origin master
 To /home/mbojan/Documents/projects/gitjestgit/projekt.git
-   53fbe37..84b5bc5  master -&gt; master
-+ git lgm
-* 84b5bc5 - (0 seconds ago) fikumiku - Michal Bojanowski  (HEAD, origin/master, origin/HEAD, master)
-* f809c2f - (0 seconds ago) drabina - Michal Bojanowski 
-* 53fbe37 - (0 seconds ago) kominiarz - szef 
-* 694ca7b - (0 seconds ago) Wers o gruszce - szef 
-* 7e51962 - (0 seconds ago) Pierwsze wersje plików - szef </code></pre>
+   f8ee2e9..081dd3c  master -&gt; master
+szef:./szef$ git lgm
+* 081dd3c - (0 seconds ago) fikumiku - Michal Bojanowski  (HEAD, origin/master, origin/HEAD, master)
+* 70c01cb - (1 second ago) drabina - Michal Bojanowski 
+* f8ee2e9 - (1 second ago) kominiarz - szef 
+* 4b8eb96 - (1 second ago) Wers o gruszce - szef 
+* 5a43cf2 - (1 second ago) Pierwsze wersje plików - szef </code></pre>
 <p>W między czasie pracownik2 sklonował sobie forka</p>
-<pre><code>+ git clone fork-pracownik1 pracownik2
+<pre><code>pracownik2:.$ git clone fork-pracownik1 pracownik2
 Cloning into 'pracownik2'...
 done.
-+ cd pracownik2
-+ git checkout gruszka
+pracownik2:.$ cd pracownik2
+pracownik2:./pracownik2$ git checkout gruszka
 Switched to a new branch 'gruszka'
 Branch gruszka set up to track remote branch gruszka from origin.
-+ git lgm
-* 373e766 - (0 seconds ago) śliweczka - pracownik1  (HEAD, origin/gruszka, gruszka)
-* e5f29c3 - (0 seconds ago) jabłuszka - pracownik1 
-* 53fbe37 - (0 seconds ago) kominiarz - szef  (origin/master, origin/HEAD, master)
-* 694ca7b - (0 seconds ago) Wers o gruszce - szef 
-* 7e51962 - (0 seconds ago) Pierwsze wersje plików - szef </code></pre>
+pracownik2:./pracownik2$ git lgm
+* fe6fc48 - (1 second ago) śliweczka - pracownik1  (HEAD, origin/gruszka, gruszka)
+* c843f28 - (1 second ago) jabłuszka - pracownik1 
+* f8ee2e9 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD, master)
+* 4b8eb96 - (1 second ago) Wers o gruszce - szef 
+* 5a43cf2 - (1 second ago) Pierwsze wersje plików - szef </code></pre>
 <p>Pracownik1 chce kontynuować swoją pracę, ale bazować na zmianach dokonanych przez szefa. W tym celu musi zaktualizować swoje repo.</p>
 <p>Dodajemy główne repo projektu jako remote (pod nazwą <code>upstream</code>) ściągamy (<code>fetch</code>) i mergujemy (<code>pull</code>) zmiany z <code>upstream/master</code>.</p>
-<pre><code>+ cd pracownik1
-+ git remote add upstream ../projekt.git
-+ git fetch upstream
+<pre><code>pracownik1:.$ cd pracownik1
+pracownik1:./pracownik1$ git remote add upstream ../projekt.git
+pracownik1:./pracownik1$ git fetch upstream
 From ../projekt
  * [new branch]      master     -&gt; upstream/master
-+ git checkout master
+pracownik1:./pracownik1$ git checkout master
 Switched to branch 'master'
 Your branch is up-to-date with 'origin/master'.
-+ git pull upstream master
+pracownik1:./pracownik1$ git pull upstream master
 From ../projekt
  * branch            master     -&gt; FETCH_HEAD
-Updating 53fbe37..84b5bc5
+Updating f8ee2e9..081dd3c
 Fast-forward
  plik2.txt | 2 ++
  1 file changed, 2 insertions(+)
-+ git lgm
-* 373e766 - (0 seconds ago) śliweczka - pracownik1  (origin/gruszka, gruszka)
-* e5f29c3 - (0 seconds ago) jabłuszka - pracownik1 
-| * 84b5bc5 - (0 seconds ago) fikumiku - Michal Bojanowski  (HEAD, upstream/master, master)
-| * f809c2f - (0 seconds ago) drabina - Michal Bojanowski 
+pracownik1:./pracownik1$ git lgm
+* 081dd3c - (0 seconds ago) fikumiku - Michal Bojanowski  (HEAD, upstream/master, master)
+* 70c01cb - (1 second ago) drabina - Michal Bojanowski 
+| * fe6fc48 - (1 second ago) śliweczka - pracownik1  (origin/gruszka, gruszka)
+| * c843f28 - (1 second ago) jabłuszka - pracownik1 
 |/  
-* 53fbe37 - (0 seconds ago) kominiarz - szef  (origin/master, origin/HEAD)
-* 694ca7b - (0 seconds ago) Wers o gruszce - szef 
-* 7e51962 - (0 seconds ago) Pierwsze wersje plików - szef </code></pre>
+* f8ee2e9 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD)
+* 4b8eb96 - (1 second ago) Wers o gruszce - szef 
+* 5a43cf2 - (1 second ago) Pierwsze wersje plików - szef </code></pre>
 <p>Gałęzie <code>upstream/master</code> i <code>gruszka</code> się rozgałęziają ponieważ pracownik1 i szef pracowali równolegle.</p>
 <p>Przepisujemy zmiany w <code>gruszka</code> nad <code>upstream/master</code></p>
-<pre><code>+ cd pracownik1
-+ git lgm
-* 373e766 - (0 seconds ago) śliweczka - pracownik1  (origin/gruszka, gruszka)
-* e5f29c3 - (0 seconds ago) jabłuszka - pracownik1 
-| * 84b5bc5 - (0 seconds ago) fikumiku - Michal Bojanowski  (HEAD, upstream/master, master)
-| * f809c2f - (0 seconds ago) drabina - Michal Bojanowski 
+<pre><code>pracownik1:.$ cd pracownik1
+pracownik1:./pracownik1$ git lgm
+* 081dd3c - (0 seconds ago) fikumiku - Michal Bojanowski  (HEAD, upstream/master, master)
+* 70c01cb - (1 second ago) drabina - Michal Bojanowski 
+| * fe6fc48 - (1 second ago) śliweczka - pracownik1  (origin/gruszka, gruszka)
+| * c843f28 - (1 second ago) jabłuszka - pracownik1 
 |/  
-* 53fbe37 - (0 seconds ago) kominiarz - szef  (origin/master, origin/HEAD)
-* 694ca7b - (0 seconds ago) Wers o gruszce - szef 
-* 7e51962 - (0 seconds ago) Pierwsze wersje plików - szef + git checkout gruszka
+* f8ee2e9 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD)
+* 4b8eb96 - (1 second ago) Wers o gruszce - szef 
+* 5a43cf2 - (1 second ago) Pierwsze wersje plików - szef pracownik1:./pracownik1$ git checkout gruszka
 Switched to branch 'gruszka'
-+ git pull --rebase upstream master
+pracownik1:./pracownik1$ git pull --rebase upstream master
 From ../projekt
  * branch            master     -&gt; FETCH_HEAD
 First, rewinding head to replay your work on top of it...
 Applying: jabłuszka
 Applying: śliweczka
-+ git lgm
-* 93c534e - (1 second ago) śliweczka - pracownik1  (HEAD, gruszka)
-* 1159ce2 - (1 second ago) jabłuszka - pracownik1 
-* 84b5bc5 - (1 second ago) fikumiku - Michal Bojanowski  (upstream/master, master)
-* f809c2f - (1 second ago) drabina - Michal Bojanowski 
-| * 373e766 - (1 second ago) śliweczka - pracownik1  (origin/gruszka)
-| * e5f29c3 - (1 second ago) jabłuszka - pracownik1 
+pracownik1:./pracownik1$ git lgm
+* 8938bbb - (1 second ago) śliweczka - pracownik1  (HEAD, gruszka)
+* bbe2537 - (1 second ago) jabłuszka - pracownik1 
+* 081dd3c - (0 seconds ago) fikumiku - Michal Bojanowski  (upstream/master, master)
+* 70c01cb - (1 second ago) drabina - Michal Bojanowski 
+| * fe6fc48 - (1 second ago) śliweczka - pracownik1  (origin/gruszka)
+| * c843f28 - (1 second ago) jabłuszka - pracownik1 
 |/  
-* 53fbe37 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD)
-* 694ca7b - (1 second ago) Wers o gruszce - szef 
-* 7e51962 - (1 second ago) Pierwsze wersje plików - szef </code></pre>
+* f8ee2e9 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD)
+* 4b8eb96 - (1 second ago) Wers o gruszce - szef 
+* 5a43cf2 - (1 second ago) Pierwsze wersje plików - szef </code></pre>
 <p>Gruszka ma w sobie zmiany z mastera.</p>
 <p>wypychamy</p>
-<pre><code>+ cd pracownik1
-+ git checkout gruszka
+<pre><code>pracownik1:.$ cd pracownik1
+pracownik1:./pracownik1$ git checkout gruszka
 Already on 'gruszka'
-+ git rebase origin/gruszka
+pracownik1:./pracownik1$ git rebase origin/gruszka
 First, rewinding head to replay your work on top of it...
 Applying: drabina
 Applying: fikumiku
-+ git lgm
-* 01eae0a - (1 second ago) fikumiku - Michal Bojanowski  (HEAD, gruszka)
-* 5e3dba9 - (1 second ago) drabina - Michal Bojanowski 
-* 373e766 - (1 second ago) śliweczka - pracownik1  (origin/gruszka)
-* e5f29c3 - (1 second ago) jabłuszka - pracownik1 
-| * 84b5bc5 - (1 second ago) fikumiku - Michal Bojanowski  (upstream/master, master)
-| * f809c2f - (1 second ago) drabina - Michal Bojanowski 
+pracownik1:./pracownik1$ git lgm
+* bc25b17 - (0 seconds ago) fikumiku - Michal Bojanowski  (HEAD, gruszka)
+* 78ddc64 - (1 second ago) drabina - Michal Bojanowski 
+* fe6fc48 - (1 second ago) śliweczka - pracownik1  (origin/gruszka)
+* c843f28 - (1 second ago) jabłuszka - pracownik1 
+| * 081dd3c - (0 seconds ago) fikumiku - Michal Bojanowski  (upstream/master, master)
+| * 70c01cb - (1 second ago) drabina - Michal Bojanowski 
 |/  
-* 53fbe37 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD)
-* 694ca7b - (1 second ago) Wers o gruszce - szef 
-* 7e51962 - (1 second ago) Pierwsze wersje plików - szef + git push origin gruszka
+* f8ee2e9 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD)
+* 4b8eb96 - (1 second ago) Wers o gruszce - szef 
+* 5a43cf2 - (1 second ago) Pierwsze wersje plików - szef pracownik1:./pracownik1$ git push origin gruszka
 To /home/mbojan/Documents/projects/gitjestgit/fork-pracownik1.git
-   373e766..01eae0a  gruszka -&gt; gruszka
-+ git lgm
-* 01eae0a - (1 second ago) fikumiku - Michal Bojanowski  (HEAD, origin/gruszka, gruszka)
-* 5e3dba9 - (1 second ago) drabina - Michal Bojanowski 
-* 373e766 - (1 second ago) śliweczka - pracownik1 
-* e5f29c3 - (1 second ago) jabłuszka - pracownik1 
-| * 84b5bc5 - (1 second ago) fikumiku - Michal Bojanowski  (upstream/master, master)
-| * f809c2f - (1 second ago) drabina - Michal Bojanowski 
+   fe6fc48..bc25b17  gruszka -&gt; gruszka
+pracownik1:./pracownik1$ git lgm
+* bc25b17 - (0 seconds ago) fikumiku - Michal Bojanowski  (HEAD, origin/gruszka, gruszka)
+* 78ddc64 - (1 second ago) drabina - Michal Bojanowski 
+* fe6fc48 - (1 second ago) śliweczka - pracownik1 
+* c843f28 - (1 second ago) jabłuszka - pracownik1 
+| * 081dd3c - (0 seconds ago) fikumiku - Michal Bojanowski  (upstream/master, master)
+| * 70c01cb - (1 second ago) drabina - Michal Bojanowski 
 |/  
-* 53fbe37 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD)
-* 694ca7b - (1 second ago) Wers o gruszce - szef 
-* 7e51962 - (1 second ago) Pierwsze wersje plików - szef </code></pre>
+* f8ee2e9 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD)
+* 4b8eb96 - (1 second ago) Wers o gruszce - szef 
+* 5a43cf2 - (1 second ago) Pierwsze wersje plików - szef </code></pre>
 <p>Meanwhile, pracownik2 chce zacząć pracować. Zaczyna od update-u</p>
-<pre><code>+ cd pracownik2
-+ git remote update
+<pre><code>pracownik2:.$ cd pracownik2
+pracownik2:./pracownik2$ git remote update
 Fetching origin
 From /home/mbojan/Documents/projects/gitjestgit/fork-pracownik1
-   373e766..01eae0a  gruszka    -&gt; origin/gruszka
-+ git lgm
-* 01eae0a - (1 second ago) fikumiku - Michal Bojanowski  (origin/gruszka)
-* 5e3dba9 - (1 second ago) drabina - Michal Bojanowski 
-* 373e766 - (1 second ago) śliweczka - pracownik1  (HEAD, gruszka)
-* e5f29c3 - (1 second ago) jabłuszka - pracownik1 
-* 53fbe37 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD, master)
-* 694ca7b - (1 second ago) Wers o gruszce - szef 
-* 7e51962 - (1 second ago) Pierwsze wersje plików - szef </code></pre>
+   fe6fc48..bc25b17  gruszka    -&gt; origin/gruszka
+pracownik2:./pracownik2$ git lgm
+* bc25b17 - (0 seconds ago) fikumiku - Michal Bojanowski  (origin/gruszka)
+* 78ddc64 - (1 second ago) drabina - Michal Bojanowski 
+* fe6fc48 - (1 second ago) śliweczka - pracownik1  (HEAD, gruszka)
+* c843f28 - (1 second ago) jabłuszka - pracownik1 
+* f8ee2e9 - (1 second ago) kominiarz - szef  (origin/master, origin/HEAD, master)
+* 4b8eb96 - (1 second ago) Wers o gruszce - szef 
+* 5a43cf2 - (1 second ago) Pierwsze wersje plików - szef </code></pre>
 </div>
 </div>
 
