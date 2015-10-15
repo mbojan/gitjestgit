@@ -12,21 +12,27 @@ output:
 ---
 
 ```{r, check_commands, results="hide", echo=FALSE}
-# check if necessary commands are present
+# Check if necessary commands are present
 cmd <- c("bash", "sh", "git")
 r <- sapply(cmd, Sys.which)
 empty <- r == ""
 if( any(empty) ) 
   stop(paste("some commands are not available: ", paste(cmd[empty], collapse=", ")))
 
-library(knitr) # dev version
+library(knitr, lib="lib") # dev version
 pr <- function(user=NULL) {
   u <- if(is.null(user)) "" else paste0(user, ":")
   paste0("PS4=", u, sQuote('$(pwd | sed s/^.*gitjestgit/./)\\$ ') )
 }
 
-opts_chunk$set(engine="bash", comment="", engine.env=pr(), echo=FALSE,
-               comment=NA, engine.opts="-x")
+opts_chunk$set(
+  engine="bash", 
+  engine.opts="-x",
+  engine.env=pr(), 
+  comment="", 
+  echo=FALSE,
+  comment=NA
+)
 ```
 
 ```{bash gitalias}
