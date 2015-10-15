@@ -70,4 +70,5 @@ proof:
 
 .PHONY: pkgs
 pkgs:
-	Rscript -e 'for(p in c("knitr")) devtools::with_lib("lib", devtools::install(file.path("pkgs", p)))'
+	mkdir -p lib
+	Rscript -e 'library(devtools); with_lib("lib", install("src/knitr"))'
