@@ -1,3 +1,6 @@
 [submodule "src/knitr"]
 	path = src/knitr
 	url = git@github.com:mbojan/knitr.git
+[submodule "src/runr"]
+	path = src/runr
+	url = git@github.com:yihui/runr.git

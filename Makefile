@@ -39,3 +39,4 @@ proof:
 pkgs:
 	mkdir -p lib
 	Rscript -e 'library(devtools); with_lib("lib", install("src/knitr"))'
+	Rscript -e 'library(devtools); with_lib("lib", install("src/runr"))'
